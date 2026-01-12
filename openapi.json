@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://api.example.com/v1"
+      "url": "https://api.keyframelabs.com/v1"
     }
   ],
   "paths": {
