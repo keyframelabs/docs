@@ -13,12 +13,12 @@
       "anchors": [
         {
           "anchor": "Company homepage",
-          "icon": "book-open-cover",
+          "icon": "house-blank",
           "href": "https://keyframelabs.com"
         },
         {
           "anchor": "Playground",
-          "icon": "newspaper",
+          "icon": "laptop",
           "href": "https://playground.keyframelabs.com"
         }
       ]
