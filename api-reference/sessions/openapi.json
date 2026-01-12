@@ -100,7 +100,7 @@
           },
           "persona_id": {
             "type": "string",
-            "description": "Id of persona to use"
+            "description": "ID of persona to use"
           }
         }
       },
