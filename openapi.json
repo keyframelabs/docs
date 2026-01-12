@@ -67,15 +67,12 @@
             }
           },
           "500": {
-            "description": "Internal error / failed to start agent session",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/HTTPExceptionResponse" },
                 "examples": {
-                  "internal": { "value": { "detail": "Internal server error" } },
-                  "dispatchFailed": {
-                    "value": { "detail": "Failed to start agent session" }
-                  }
+                  "internal": { "value": { "detail": "Internal server error" } }
                 }
               }
             }
@@ -134,7 +131,7 @@
         "required": ["detail"],
         "properties": {
           "detail": {
-            "description": "Error detail (FastAPI HTTPException.detail)",
+            "description": "Error detail",
             "anyOf": [{ "type": "string" }, { "type": "object" }, { "type": "array" }]
           }
         }
