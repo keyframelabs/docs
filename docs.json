@@ -70,6 +70,13 @@
               "source": "openapi.json",
               "directory": "api-reference/sessions"
             }
+          },
+          {
+            "group": "Sessions",
+            "openapi": {
+              "source": "openapi.json",
+              "directory": "api-reference/sessions"
+            }
           }
         ]
       }
