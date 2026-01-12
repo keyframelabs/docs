@@ -96,11 +96,11 @@
         "properties": {
           "model_id": {
             "type": "string",
-            "description": "Model to use"
+            "description": "ID of model to use"
           },
           "persona_id": {
             "type": "string",
-            "description": "Persona to use"
+            "description": "Id of persona to use"
           }
         }
       },
@@ -116,11 +116,11 @@
           },
           "participant_token": {
             "type": "string",
-            "description": "JWT for 'source' participant that passes its audio over WebRTC to persona (e.g., a voice agent)"
+            "description": "JWT for 'source' participant to pass audio to persona"
           },
           "agent_identity": {
             "type": "string",
-            "description": "Identity that the persona will use in the WebRTC session",
+            "description": "Identity of the persona in the WebRTC session",
             "examples": ["agent"]
           }
         }
