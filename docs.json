@@ -71,7 +71,8 @@
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Sessions",
+            "expanded": true,
             "pages": [
               "api-reference/endpoint/create"
             ]
