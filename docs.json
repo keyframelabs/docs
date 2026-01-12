@@ -63,20 +63,7 @@
       },
       {
         "tab": "API reference",
-        "groups": [
-          {
-            "group": "Sessions",
-            "openapi": {
-              "source": "api-reference/sessions/openapi.json"
-            }
-          },
-          {
-            "group": "Sessions",
-            "openapi": {
-              "source": "api-reference/sessions/openapi.json"
-            }
-          }
-        ]
+        "source": "api-reference/sessions/openapi.json"
       }
     ]
   },
