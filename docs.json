@@ -12,14 +12,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
+          "anchor": "Company homepage",
           "icon": "book-open-cover",
-          "href": "https://mintlify.com/docs"
+          "href": "https://keyframelabs.com"
         },
         {
-          "anchor": "Blog",
+          "anchor": "Playground",
           "icon": "newspaper",
-          "href": "https://mintlify.com/blog"
+          "href": "https://playground.keyframelabs.com"
         }
       ]
     },
