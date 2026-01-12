@@ -62,16 +62,7 @@
         ]
       },
       {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "Sessions",
-            "expanded": true,
-            "pages": [
-              "api-reference/endpoint/create"
-            ]
-          }
-        ]
+        "tab": "API reference"
       }
     ]
   },
