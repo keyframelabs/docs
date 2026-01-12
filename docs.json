@@ -62,7 +62,8 @@
         ]
       },
       {
-        "tab": "API reference"
+        "tab": "API reference",
+        "openapi": "openapi.json"
       }
     ]
   },
