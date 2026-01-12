@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/v1/sessions": {
+    "/sessions": {
       "post": {
         "operationId": "createSession",
         "security": [
@@ -119,11 +119,11 @@
           },
           "participant_token": {
             "type": "string",
-            "description": "JWT for 'source' participant passing audio to persona (e.g., a voice agent)"
+            "description": "JWT for 'source' participant that passes its audio over WebRTC to persona (e.g., a voice agent)"
           },
           "agent_identity": {
             "type": "string",
-            "description": "Identity that the persona will use in the room",
+            "description": "Identity that the persona will use in the WebRTC session",
             "examples": ["agent"]
           }
         }
