@@ -8,7 +8,7 @@
     "/v1/sessions": {
       "post": {
         "operationId": "createSession",
-        "summary": "Create a LiveKit session backed by a GPU node reservation",
+        "summary": "Create session",
         "requestBody": {
           "required": true,
           "content": {
@@ -83,11 +83,11 @@
         "properties": {
           "model_id": {
             "type": "string",
-            "description": "Model namespace used for capacity reservation / routing"
+            "description": "Model to use"
           },
           "persona_id": {
             "type": "string",
-            "description": "Persona to start on the GPU node"
+            "description": "Persona to use"
           }
         }
       },
@@ -98,16 +98,16 @@
         "properties": {
           "server_url": {
             "type": "string",
-            "description": "LiveKit server URL",
-            "examples": ["wss://livekit.example.com"]
+            "description": "WebRTC connection URL",
+            "examples": ["wss://..."]
           },
           "participant_token": {
             "type": "string",
-            "description": "JWT for the source participant (the user)"
+            "description": "JWT for 'source' participant passing audio to persona (e.g., a voice agent)"
           },
           "agent_identity": {
             "type": "string",
-            "description": "Identity that the agent will use in the room",
+            "description": "Identity that the persona will use in the room",
             "examples": ["agent"]
           }
         }
