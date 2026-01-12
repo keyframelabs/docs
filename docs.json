@@ -63,7 +63,7 @@
       },
       {
         "tab": "API reference",
-        "openapi": "api-reference/sessions/openapi.json"
+        "openapi": "/api-reference/v1/openapi.json"
       }
     ]
   },
