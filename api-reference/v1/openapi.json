@@ -11,8 +11,8 @@
   ],
   "paths": {
     "/sessions": {
-      "tags": ["Sessions"],
       "post": {
+        "tags": ["Sessions"],
         "operationId": "createSession",
         "security": [
           {
