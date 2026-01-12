@@ -4,10 +4,20 @@
     "title": "Sessions API",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.example.com/v1"
+    }
+  ],
   "paths": {
     "/v1/sessions": {
       "post": {
         "operationId": "createSession",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "summary": "Create session",
         "requestBody": {
           "required": true,
@@ -75,6 +85,12 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
     "schemas": {
       "CreateSessionRequest": {
         "type": "object",
