@@ -67,15 +67,13 @@
           {
             "group": "Sessions",
             "openapi": {
-              "source": "api-reference/sessions/openapi.json",
-              "directory": "api-reference/sessions"
+              "source": "api-reference/sessions/openapi.json"
             }
           },
           {
             "group": "Sessions",
             "openapi": {
-              "source": "api-reference/sessions/openapi.json",
-              "directory": "api-reference/sessions"
+              "source": "api-reference/sessions/openapi.json"
             }
           }
         ]
