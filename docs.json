@@ -29,14 +29,18 @@
         "groups": [
           {
             "group": "Getting started",
+            "expanded": true,
             "pages": [
               "index",
               "guides/getting-started/quickstart"
             ]
           },
           {
-            "group": "Integrations",
-            "pages": []
+            "group": "Speech-to-video (S2V)",
+            "expanded": true,
+            "pages": [
+              "guides/speech-to-video-s2-v/overview"
+            ]
           }
         ]
       },
