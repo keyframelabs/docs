@@ -33,6 +33,10 @@
               "index",
               "guides/getting-started/quickstart"
             ]
+          },
+          {
+            "group": "Integrations",
+            "pages": []
           }
         ]
       },
