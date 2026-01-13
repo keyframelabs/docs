@@ -37,18 +37,19 @@
             "pages": [
               "guides/integration/overview",
               {
-                "group": "Bring your own agent",
+                "group": "Agent frameworks",
                 "expanded": true,
                 "pages": [
                   "guides/integration/agent-frameworks/elevenlabs",
-                  "guides/integration/agent-frameworks/cartesia",
-                  "guides/integration/agent-frameworks/gemini",
-                  "guides/integration/agent-frameworks/open-ai"
+                  "guides/integration/agent-frameworks/cartesia"
                 ]
               },
               {
                 "group": "Live model APIs",
-                "pages": []
+                "pages": [
+                  "guides/integration/live-model-apis/gemini-live",
+                  "guides/integration/live-model-apis/open-ai"
+                ]
               }
             ]
           }
