@@ -45,7 +45,7 @@
                 "group": "Speech-to-video (S2V)",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/speech-to-video/eleven-labs",
+                  "guides/integration/speech-to-video/elevenlabs",
                   "guides/integration/speech-to-video/cartesia",
                   "guides/integration/speech-to-video/gemini",
                   "guides/integration/speech-to-video/open-ai"
