@@ -37,10 +37,10 @@
             "pages": [
               "guides/integration/overview",
               {
-                "group": "Speech-to-video (S2V)",
+                "group": "Agent frameworks",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/speech-to-video/elevenlabs",
+                  "guides/integration/agent-frameworks/elevenlabs",
                   "guides/integration/speech-to-video/cartesia",
                   "guides/integration/speech-to-video/gemini",
                   "guides/integration/speech-to-video/open-ai"
