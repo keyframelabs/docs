@@ -37,7 +37,7 @@
             "pages": [
               "guides/integration/overview",
               {
-                "group": "Agent frameworks",
+                "group": "Bring your own agent",
                 "expanded": true,
                 "pages": [
                   "guides/integration/agent-frameworks/elevenlabs",
@@ -45,6 +45,10 @@
                   "guides/integration/agent-frameworks/gemini",
                   "guides/integration/agent-frameworks/open-ai"
                 ]
+              },
+              {
+                "group": "Model APIs",
+                "pages": []
               }
             ]
           }
