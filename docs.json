@@ -32,7 +32,8 @@
             "expanded": true,
             "pages": [
               "index",
-              "guides/getting-started/quickstart"
+              "guides/getting-started/quickstart",
+              "guides/getting-started/dashboard"
             ]
           },
           {
