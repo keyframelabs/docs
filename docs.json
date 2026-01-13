@@ -41,9 +41,9 @@
                 "expanded": true,
                 "pages": [
                   "guides/integration/agent-frameworks/elevenlabs",
-                  "guides/integration/speech-to-video/cartesia",
-                  "guides/integration/speech-to-video/gemini",
-                  "guides/integration/speech-to-video/open-ai"
+                  "guides/integration/agent-frameworks/cartesia",
+                  "guides/integration/agent-frameworks/gemini",
+                  "guides/integration/agent-frameworks/open-ai"
                 ]
               }
             ]
