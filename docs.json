@@ -37,13 +37,17 @@
             ]
           },
           {
-            "group": "Personas",
+            "group": "Integration",
             "expanded": true,
             "pages": [
               "guides/speech-to-video-s2-v/overview",
               {
                 "group": "Speech-to-video",
-                "pages": []
+                "expanded": true,
+                "pages": [
+                  "guides/integration/speech-to-video/eleven-labs",
+                  "guides/integration/speech-to-video/cartesia"
+                ]
               }
             ]
           }
