@@ -12,11 +12,6 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Company",
-          "icon": "house-blank",
-          "href": "https://keyframelabs.com"
-        },
-        {
           "anchor": "Playground",
           "icon": "laptop",
           "href": "https://playground.keyframelabs.com"
