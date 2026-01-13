@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Keyframe Labs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#81787A",
+    "light": "#342E2E",
+    "dark": "#CFCDC7"
   },
   "favicon": "/favicon.png",
   "navigation": {
