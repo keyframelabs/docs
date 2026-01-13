@@ -40,7 +40,7 @@
             "group": "Integration",
             "expanded": true,
             "pages": [
-              "guides/speech-to-video-s2-v/overview",
+              "guides/integration/overview",
               {
                 "group": "Speech-to-video (S2V)",
                 "expanded": true,
