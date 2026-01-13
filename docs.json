@@ -37,10 +37,14 @@
             ]
           },
           {
-            "group": "Speech-to-video (S2V)",
+            "group": "Personas",
             "expanded": true,
             "pages": [
-              "guides/speech-to-video-s2-v/overview"
+              "guides/speech-to-video-s2-v/overview",
+              {
+                "group": "Speech-to-video",
+                "pages": []
+              }
             ]
           }
         ]
