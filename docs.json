@@ -4,8 +4,8 @@
   "name": "Keyframe Labs",
   "colors": {
     "primary": "#81787A",
-    "light": "#81787A",
-    "dark": "#CFCDC7"
+    "light": "#CFCDC7",
+    "dark": "#342E2E"
   },
   "favicon": "/favicon.png",
   "navigation": {
