@@ -35,7 +35,7 @@
             "group": "Integration",
             "expanded": true,
             "pages": [
-              "guides/integration/overview",
+              "guides/integration/index",
               {
                 "group": "Agent frameworks",
                 "expanded": true,
