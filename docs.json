@@ -46,6 +46,7 @@
               },
               {
                 "group": "Live model APIs",
+                "expanded": true,
                 "pages": [
                   "guides/integration/live-model-apis/gemini-live",
                   "guides/integration/live-model-apis/open-ai"
