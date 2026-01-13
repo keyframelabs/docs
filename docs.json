@@ -4,8 +4,8 @@
   "name": "Keyframe Labs",
   "colors": {
     "primary": "#81787A",
-    "light": "#342E2E",
-    "dark": "#CFCDC7"
+    "light": "#81787A",
+    "dark": "#81787A"
   },
   "favicon": "/favicon.png",
   "navigation": {
@@ -98,6 +98,12 @@
       "x": "https://x.com/mintlify",
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
+    }
+  },
+  "background": {
+    "color": {
+      "light": "#CFCDC7",
+      "dark": "#342E2E"
     }
   }
 }
