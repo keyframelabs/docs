@@ -58,6 +58,9 @@
       {
         "tab": "API reference",
         "openapi": "/api-reference/v1/openapi.json"
+      },
+      {
+        "tab": "SDK reference"
       }
     ]
   },
