@@ -96,7 +96,8 @@
   "footer": {
     "socials": {
       "github": "https://github.com/keyframelabs",
-      "linkedin": "https://www.linkedin.com/company/keyframe-labs-inc"
+      "linkedin": "https://www.linkedin.com/company/keyframe-labs-inc",
+      "website": "https://keyframelabs.com"
     }
   },
   "background": {
