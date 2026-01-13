@@ -40,8 +40,8 @@
                 "group": "Agent frameworks",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/agent-frameworks/elevenlabs",
-                  "guides/integration/agent-frameworks/cartesia"
+                  "guides/integration/agent-frameworks/elevenlabs-agents",
+                  "guides/integration/agent-frameworks/cartesia-line"
                 ]
               },
               {
