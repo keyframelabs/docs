@@ -102,8 +102,8 @@
   },
   "background": {
     "color": {
-      "light": "#CFCDC7",
-      "dark": "#342E2E"
+      "light": "#FFFFFF",
+      "dark": "#000000"
     }
   }
 }
