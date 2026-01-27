@@ -12,9 +12,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Playground",
+          "anchor": "Demo",
           "icon": "laptop",
-          "href": "https://playground.keyframelabs.com"
+          "href": "https://demo.keyframelabs.com"
         }
       ]
     },
