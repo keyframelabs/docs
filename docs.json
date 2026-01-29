@@ -45,11 +45,11 @@
                 ]
               },
               {
-                "group": "Live model APIs",
+                "group": "Real-time LLMs",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/live-model-apis/gemini-live",
-                  "guides/integration/live-model-apis/openai-realtime"
+                  "guides/integration/real-time-llms/gemini-live",
+                  "guides/integration/real-time-llms/openai-realtime"
                 ]
               }
             ]
