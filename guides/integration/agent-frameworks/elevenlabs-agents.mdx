@@ -6,15 +6,4 @@ title: "ElevenLabs Agents"
 
 - [A signed URL from ElevenLabs for your agent](https://elevenlabs.io/docs/agents-platform/customization/authentication#using-signed-urls)
 
-## Your voice agent details
-
-```typescript
-type VoiceAgentDetails = {
-  type: 'gemini' | 'elevenlabs' | 'cartesia';
-  token?: string;       // For gemini, cartesia
-  agent_id?: string;    // For elevenlabs, cartesia
-  signed_url?: string;  // For elevenlabs
-};
-```
-
 ## Creating a persona powered by ElevenLabs
