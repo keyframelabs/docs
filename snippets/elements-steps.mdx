@@ -5,7 +5,9 @@
     ```
   </Step>
   <Step title="Create the HTML">
+    ```html
     
+    ```
   </Step>
   <Step title="Generate ephemeral Keyframe credentials" stepNumber={3}>
     <Tabs>
@@ -15,13 +17,29 @@
     </Tabs>
   </Step>
   <Step title="Replace the placeholder Keyframe and provider credentials" stepNumber={4}>
+    ```html
     
+    ```
   </Step>
   <Step title="Start a local server" stepNumber={5}>
-    
+    <Tabs>
+      <Tab title="node">
+        ```shellscript
+        npx http-server -p 8000
+        ```
+      </Tab>
+      <Tab title="python">
+        ```shellscript
+        python -m http.server 8000
+        ```
+      </Tab>
+    </Tabs>
   </Step>
   <Step title="Open and test" stepNumber={6}>
-    
+    1. Navigate to `http://localhost:8000` in your browser
+    2. Allow microphone access when prompted
+    3. Your persona will appear automatically and you can start talking
+    4. When you’re done, close the browser tab to end the session
   </Step>
 </Steps>
 
