@@ -8,4 +8,18 @@ Keyframe personas integrate with both agent frameworks (e.g., ElevenLabs, Cartes
 - Your client app continues to interface with your agent framework or live model API
 - Keyframe's no-code or low-code components take care of relaying "raw" agent / model audio to the Keyframe platform and rendering a persona synced with said audio
 
-![Integration Overview 1](/images/integration-overview-1.png)
+```
++---------------------+                                     +--------------------------+
+|                     | ---------- User input ------------> |                          |
+|                     |                                     |         Provider         |
+|                     | <--- Raw agent / model audio ------ | (Agent framework or API) |
+|       Client        |                                     |                          |
+|  (Your client app)  |                                     +--------------------------+
+|                     |
+|                     |                                     +--------------------------+
+|                     | ---- Relayed agent audio ---------> |                          |
+|                     |                                     |         Keyframe         |
+|                     | <----- Rendered persona ----------- |    (Keyframe platform)   |
+|                     |                                     |                          |
++---------------------+                                     +--------------------------+
+```
