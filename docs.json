@@ -40,16 +40,16 @@
                 "group": "Agent frameworks",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/agent-frameworks/elevenlabs-agents",
-                  "guides/integration/agent-frameworks/cartesia-line"
+                  "guides/integration/agent-frameworks/cartesia-line",
+                  "guides/integration/agent-frameworks/elevenlabs-agents"
                 ]
               },
               {
                 "group": "Real-time LLMs",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/real-time-llms/openai-realtime",
-                  "guides/integration/real-time-llms/gemini-live"
+                  "guides/integration/real-time-llms/gemini-live",
+                  "guides/integration/real-time-llms/openai-realtime"
                 ]
               }
             ]
