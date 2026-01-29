@@ -48,8 +48,8 @@
                 "group": "Real-time LLMs",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/real-time-llms/gemini-live",
-                  "guides/integration/real-time-llms/openai-realtime"
+                  "guides/integration/real-time-llms/openai-realtime",
+                  "guides/integration/real-time-llms/gemini-live"
                 ]
               }
             ]
