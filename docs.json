@@ -61,7 +61,10 @@
         "openapi": "/api-reference/v1/openapi.json"
       },
       {
-        "tab": "SDK reference"
+        "tab": "SDK reference",
+        "pages": [
+          "sdk-reference/java-script"
+        ]
       }
     ]
   },
