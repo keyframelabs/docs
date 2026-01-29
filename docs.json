@@ -27,8 +27,8 @@
             "expanded": true,
             "pages": [
               "index",
-              "guides/getting-started/get-your-api-key",
-              "guides/getting-started/quickstart"
+              "guides/getting-started/quickstart",
+              "guides/getting-started/get-your-api-key"
             ]
           },
           {
