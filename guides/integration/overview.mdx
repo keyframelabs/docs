@@ -3,7 +3,21 @@ title: "Overview"
 description: "Choose the right integration approach for your use case"
 ---
 
-Keyframe personas integrate with both agent frameworks (e.g., ElevenLabs, Cartesia) and live model APIs (e.g., Gemini Live, OpenAI Realtime). While each integration has minor setup differences, the overall flow is largely the same:
+Keyframe personas integrate with both agent frameworks (e.g., ElevenLabs, Cartesia) and live model APIs (e.g., Gemini Live, OpenAI Realtime). While each integration has minor setup differences, the overall flow is largely the same.
+
+## Pipeline overview
+
+<Steps>
+  <Step title="Bring your own agent or model">
+    Your client application continues to interface with your existing agent framework or live model API
+  </Step>
+  <Step title="Keyframe no-code or low-code components">
+    Recieves "raw" audio from your agent or model, and relays it to the Keyframe platform
+  </Step>
+  <Step title="Rendered persona">
+    The Keyframe components also manage rendering the generated persona in your clientapplication
+  </Step>
+</Steps>
 
 ```
 +---------------------+                                     +--------------------------+
@@ -20,5 +34,3 @@ Keyframe personas integrate with both agent frameworks (e.g., ElevenLabs, Cartes
 |                     |    (w/ synced audio and video)      |                          |
 +---------------------+                                     +--------------------------+
 ```
-
-In essence, your client app continues to interface with your existing agent framework or live model API, and Keyframe's no-code or low-code components take care of relaying "raw" agent / model audio to the Keyframe platform and rendering a persona synced with said audio.
