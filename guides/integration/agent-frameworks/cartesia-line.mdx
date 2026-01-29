@@ -1,4 +1,27 @@
 ---
 title: "Cartesia Line"
+description: "Integrate a Keyframe persona with a Cartesia Line agent"
 ---
 
+import ElementsSteps from '/snippets/elements-steps.mdx';
+
+## Prerequisites
+
+- The agent ID from Cartesia of the agent you wish to use
+- [An access token from Cartesia with appropriate agent grants](https://docs.cartesia.ai/get-started/authenticate-your-client-applications)
+
+## Your provider details
+
+Now that you have your agent details, take a note of the following snippet:
+
+```typescript
+type VoiceAgentDetails = {
+  type: 'cartesia';
+  agent_id?: '<your_cartesia_agent_id>;
+  token?: '<your_cartesia_access_token>;
+};
+```
+
+We'll be using this snippet in the steps to follow.
+
+<ElementsSteps />
