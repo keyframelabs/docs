@@ -21,16 +21,16 @@ Keyframe personas integrate with both agent frameworks (e.g., ElevenLabs, Cartes
 
 ```
 +---------------------+                                     +--------------------------+
-|                     | ---------- User input ------------> |                          |
+|                     | ----------- User input -----------> |                          |
 |                     |                                     |    Your existing agent   |
-|                     | <--- Raw agent / model audio ------ |         or LLM           |
+|                     | <----- Raw agent / LLM audio ------ |         or LLM           |
 |                     |       (will now be "relayed")       |                          |
 |                     |                                     +--------------------------+
 |   Your client app   |
 |                     |                                     +--------------------------+
-|                     | ------ Relayed agent audio -------> |                          |
+|                     | ---- Relayed agent / LLM audio ---> |                          |
 |                     |                                     |         Keyframe         |
-|                     | <------ Rendered persona ---------- |         platform         |
+|                     | <------- Rendered persona --------- |         platform         |
 |                     |    (w/ synced audio and video)      |                          |
 +---------------------+                                     +--------------------------+
 ```
