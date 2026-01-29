@@ -32,6 +32,12 @@
             ]
           },
           {
+            "group": "Resources",
+            "pages": [
+              "guides/resources/persona-library"
+            ]
+          },
+          {
             "group": "Integration",
             "expanded": true,
             "pages": [
