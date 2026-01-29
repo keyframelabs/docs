@@ -11,9 +11,15 @@
     
   </Step>
   <Step title="Generate ephemeral Keyframe credentials">
-    
+    <Tabs>
+      <Tab title="cURL">
+        ```shellscript
+        
+        ```
+      </Tab>
+    </Tabs>
   </Step>
-  <Step title="Pass the Keyframe Elements SDK your provider credentials">
+  <Step title="Replace the placeholder Keyframe and provider credentials">
     
   </Step>
   <Step title="Start a local server">
@@ -29,5 +35,5 @@
 You're successfully connected a Keyframe persona to your provider. A couple notes:
 
 - You exchanged your Keyframe API key for an ephemeral Keyframe session token
-- In the steps above, we "hardcoded" agent / LLM provider credentials. In production you'd want to generate these ephemerally
+- In the steps above, we "hardcoded" provider (agent / LLM) credentials. In production you'd want to generate these ephemerally
 - The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your persona
