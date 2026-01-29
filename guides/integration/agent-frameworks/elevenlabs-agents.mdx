@@ -6,7 +6,22 @@ import ElementsSteps from '/snippets/elements-steps.mdx';
 
 ## Prerequisites
 
-- [A signed URL from ElevenLabs for your agent](https://elevenlabs.io/docs/agents-platform/customization/authentication#using-signed-urls)
+- The agent ID from ElevenLabs you wish to use as your agent
+- [A signed URL from ElevenLabs for the chosen agent](https://elevenlabs.io/docs/agents-platform/customization/authentication#using-signed-urls)
+
+## Your provider details
+
+Now that you have your agent details, take a note of the following snippet:
+
+```typescript
+type VoiceAgentDetails = {
+  type: 'elevenlabs';
+  agent_id?: '<your_eleven_agent_id>;
+  signed_url?: '<your_eleven_agent_signed_url>';
+};
+```
+
+We'll be using this snippet in the steps to follow.
 
 ## Creating a persona powered by ElevenLabs
 

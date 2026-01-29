@@ -1,7 +1,3 @@
-import { provider } from "/snippets/eleven.mdx";
-
-Hello, my name is {provider}.
-
 <Steps>
   <Step title="Install the Elements SDK">
     ```shellscript
@@ -17,21 +13,8 @@ Hello, my name is {provider}.
   <Step title="Generate ephemeral Keyframe credentials">
     
   </Step>
-  <Step title="Generate ephemeral agent or LLM credentials">
-    <Tabs>
-      <Tab title="ElevenLabs">
-        
-      </Tab>
-      <Tab title="Cartesia">
-        
-      </Tab>
-      <Tab title="Gemini Live">
-        
-      </Tab>
-      <Tab title="OpenAI Realtime">
-        
-      </Tab>
-    </Tabs>
+  <Step title="Pass the Keyframe Elements SDK your provider credentials">
+    
   </Step>
   <Step title="Start a local server">
     
@@ -40,3 +23,11 @@ Hello, my name is {provider}.
     
   </Step>
 </Steps>
+
+## Summary
+
+You're successfully connected a Keyframe persona to your provider. A couple notes:
+
+- You exchanged your Keyframe API key for an ephemeral Keyframe session token
+- In the steps above, we "hardcoded" agent / LLM provider credentials. In production you'd want to generate these ephemerally
+- The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your persona
