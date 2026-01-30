@@ -94,7 +94,7 @@
     const voiceAgentDetails = {};
     ```
   </Step>
-  <Step title="Generate ephemeral Keyframe credentials" stepNumber={2}>
+  <Step title="Generate ephemeral Keyframe credentials" stepNumber={3}>
     <Tabs>
       <Tab title="cURL">
         ```shellscript
@@ -109,7 +109,7 @@
     </Tabs>
     Be sure to replace `kfl_sk_live...` with your actual Keyframe API key.
   </Step>
-  <Step title="Replace the placeholder Keyframe credentials" stepNumber={3}>
+  <Step title="Replace the placeholder Keyframe credentials" stepNumber={4}>
     In the HTML, replace `sessionDetails` with the values returned from the Keyframe API.
 
     ```html
@@ -117,7 +117,7 @@
     const sessionDetails = {};
     ```
   </Step>
-  <Step title="Start a local server" stepNumber={4}>
+  <Step title="Start a local server" stepNumber={5}>
     <Tabs>
       <Tab title="node">
         ```shellscript
@@ -131,7 +131,7 @@
       </Tab>
     </Tabs>
   </Step>
-  <Step title="Open and test" stepNumber={5}>
+  <Step title="Open and test" stepNumber={6}>
     1. Navigate to `http://localhost:8000` in your browser
     2. Allow microphone access when prompted
     3. Your persona will appear automatically and you can start talking
