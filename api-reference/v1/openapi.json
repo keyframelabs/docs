@@ -12,7 +12,9 @@
   "paths": {
     "/sessions": {
       "post": {
-        "tags": ["Sessions"],
+        "tags": [
+          "Sessions"
+        ],
         "operationId": "createSession",
         "security": [
           {
@@ -24,7 +26,9 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/CreateSessionRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionRequest"
+              }
             }
           }
         },
@@ -33,7 +37,9 @@
             "description": "Session created",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/CreateSessionResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSessionResponse"
+                }
               }
             }
           },
@@ -41,7 +47,9 @@
             "description": "Model not allowed for plan",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPExceptionResponse" },
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
                 "examples": {
                   "modelNotAllowed": {
                     "value": {
@@ -56,7 +64,9 @@
             "description": "No capacity available",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPExceptionResponse" },
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
                 "examples": {
                   "busy": {
                     "value": {
@@ -71,9 +81,15 @@
             "description": "Internal server error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPExceptionResponse" },
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
                 "examples": {
-                  "internal": { "value": { "detail": "Internal server error" } }
+                  "internal": {
+                    "value": {
+                      "detail": "Internal server error"
+                    }
+                  }
                 }
               }
             }
@@ -93,27 +109,45 @@
       "CreateSessionRequest": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["model_id", "persona_id"],
+        "description": "Request to create a session. Must provide exactly one of persona_id or persona_slug.",
         "properties": {
-          "model_id": {
-            "type": "string",
-            "description": "ID of model to use"
-          },
           "persona_id": {
             "type": "string",
             "description": "ID of persona to use"
+          },
+          "persona_slug": {
+            "type": "string",
+            "description": "Slug of persona to use"
           }
-        }
+        },
+        "oneOf": [
+          {
+            "required": [
+              "persona_id"
+            ]
+          },
+          {
+            "required": [
+              "persona_slug"
+            ]
+          }
+        ]
       },
       "CreateSessionResponse": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["server_url", "participant_token", "agent_identity"],
+        "required": [
+          "server_url",
+          "participant_token",
+          "agent_identity"
+        ],
         "properties": {
           "server_url": {
             "type": "string",
             "description": "WebRTC connection URL",
-            "examples": ["wss://..."]
+            "examples": [
+              "wss://..."
+            ]
           },
           "participant_token": {
             "type": "string",
@@ -122,18 +156,32 @@
           "agent_identity": {
             "type": "string",
             "description": "Identity of the persona in the WebRTC session",
-            "examples": ["agent"]
+            "examples": [
+              "agent"
+            ]
           }
         }
       },
       "HTTPExceptionResponse": {
         "type": "object",
         "additionalProperties": true,
-        "required": ["detail"],
+        "required": [
+          "detail"
+        ],
         "properties": {
           "detail": {
             "description": "Error detail",
-            "anyOf": [{ "type": "string" }, { "type": "object" }, { "type": "array" }]
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              },
+              {
+                "type": "array"
+              }
+            ]
           }
         }
       }
