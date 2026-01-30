@@ -12,6 +12,53 @@ The Keyframe API and SDKs provide simple interfaces for adding personas to AI ag
 - [Sign up](platform.keyframelabs.com) to the Keyframe Labs platform and [create a new API key](/guides/getting-started/get-your-api-key)
 - ElevenLabs, Cartesia, or Google Cloud (Gemini), to serve as your agent or LLM
 
+### Prepare your agent or LLM provider details
+
+<Tabs>
+  <Tab title="Cartesia Line">
+    To use Cartesia Line as your agent provider, you'll need:
+
+    - The agent ID from Cartesia of the agent you wish to use
+    - [An access token from Cartesia with appropriate agent grants](https://docs.cartesia.ai/get-started/authenticate-your-client-applications)
+
+    And then we'll use this snippet in the steps to follow:
+
+    ```typescript
+    type VoiceAgentDetails = {
+      type: 'cartesia';
+      agent_id?: '<your_cartesia_agent_id>;
+      token?: '<your_cartesia_access_token>;
+    };
+    ```
+  </Tab>
+  <Tab title="ElevenLabs Agents">
+    To use ElevenLabs Agents as your agent provider, you'll need:
+
+    - The agent ID from ElevenLabs of the agent you wish to use
+    - [A signed URL from ElevenLabs for the chosen agent](https://elevenlabs.io/docs/agents-platform/customization/authentication#using-signed-urls)
+
+    And then we'll use this snippet in the steps to follow:
+
+    ```typescript
+    type VoiceAgentDetails = {
+      type: 'elevenlabs';
+      agent_id?: '<your_eleven_agent_id>;
+      signed_url?: '<your_eleven_agent_signed_url>';
+    };
+    ```
+  </Tab>
+  <Tab title="Gemini Live">
+    <Warning>
+      Gemini Live support is currently in closed alpha. [Contact us](mailto:support@keyframelabs.com) if you'd like early access.
+    </Warning>
+  </Tab>
+  <Tab title="OpenAI Realtime">
+    <Warning>
+      OpenAI Realtime support is currently in closed alpha. [Contact us](mailto:support@keyframelabs.com) if you'd like early access.
+    </Warning>
+  </Tab>
+</Tabs>
+
 ## Create your first persona
 
 <ElementsSteps />
