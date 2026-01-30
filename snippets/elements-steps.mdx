@@ -86,6 +86,14 @@
     </html>
     ```
   </Step>
+  <Step title="Replace placeholder provider credentials" stepNumber={2}>
+    In the HTML, replace `voiceAgentDetails` with the agent or LLM provider details from the prerequisites.
+
+    ```html
+    // Replace with your provider values from the prerequisites
+    const voiceAgentDetails = {};
+    ```
+  </Step>
   <Step title="Generate ephemeral Keyframe credentials" stepNumber={2}>
     <Tabs>
       <Tab title="cURL">
@@ -101,15 +109,12 @@
     </Tabs>
     Be sure to replace `kfl_sk_live...` with your actual Keyframe API key.
   </Step>
-  <Step title="Replace the placeholder Keyframe and provider credentials" stepNumber={3}>
-    In the HTML, replace `voiceAgentDetails` with the agent or LLM provider details from the prerequisites, and `sessionDetails` with the values returned from the Keyframe API.
+  <Step title="Replace the placeholder Keyframe credentials" stepNumber={3}>
+    In the HTML, replace `sessionDetails` with the values returned from the Keyframe API.
 
     ```html
     // Replace with the ephemeral credentials returned by the Keyframe API
     const sessionDetails = {};
-    
-    // Replace with your provider values from the prerequisites
-    const voiceAgentDetails = {};
     ```
   </Step>
   <Step title="Start a local server" stepNumber={4}>
@@ -140,4 +145,4 @@ Congratulations on your first video call with a Keyframe persona. A couple thing
 
 - You exchanged your Keyframe API key for ephemeral Keyframe session credentials
 - The steps above "hardcoded" provider credentials—in production you'd want to generate these ephemerally
-- The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your persona
+- The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your personatial
