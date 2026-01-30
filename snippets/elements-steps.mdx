@@ -92,7 +92,14 @@
   <Step title="Generate ephemeral Keyframe credentials" stepNumber={3}>
     <Tabs>
       <Tab title="cURL">
-        
+        ```shellscript
+        curl -X POST "https://api.keyframelabs.com/v1/sessions" \                                                                                                                                               <<<
+          -H "Authorization: Bearer kfl_sk_live_..." \
+          -H "Content-Type: application/json" \
+          -d '{
+            "persona_slug": "public:kai"
+          }'
+        ```
       </Tab>
     </Tabs>
   </Step>
