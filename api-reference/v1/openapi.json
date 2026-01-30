@@ -107,29 +107,35 @@
     },
     "schemas": {
       "CreateSessionRequest": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Request to create a session. Must provide exactly one of persona_id or persona_slug.",
-        "properties": {
-          "persona_id": {
-            "type": "string",
-            "description": "ID of persona to use"
-          },
-          "persona_slug": {
-            "type": "string",
-            "description": "Slug of persona to use"
-          }
-        },
+        "description": "Request to create a session. Choose either ID or Slug.",
         "oneOf": [
           {
+            "title": "By Persona ID",
+            "type": "object",
+            "additionalProperties": false,
             "required": [
               "persona_id"
-            ]
+            ],
+            "properties": {
+              "persona_id": {
+                "type": "string",
+                "description": "ID of persona to use"
+              }
+            }
           },
           {
+            "title": "By Persona Slug",
+            "type": "object",
+            "additionalProperties": false,
             "required": [
               "persona_slug"
-            ]
+            ],
+            "properties": {
+              "persona_slug": {
+                "type": "string",
+                "description": "Slug of persona to use"
+              }
+            }
           }
         ]
       },
