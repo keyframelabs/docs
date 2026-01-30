@@ -43,17 +43,11 @@
       <script type="module">
         import { PersonaView } from 'https://esm.sh/@keyframelabs/elements@0.0.4';
     
-        const sessionDetails = {
-          server_url: '<to_be_replaced>',
-          participant_token: '<to_be_replaced>',
-          agent_identity: '<to_be_replaced>',
-        };
+        // Replace with ephemeral credentials returned by the Keyframe API
+        const sessionDetails = {};
     
-        const voiceAgentDetails = {
-          type: '<to_be_replaced>',
-          agent_id: '<to_be_replaced>',
-          signed_url: '<to_be_replaced>',
-        };
+    	// Replace with provider values
+        const voiceAgentDetails = {};
     
         const view = new PersonaView({
           container: document.getElementById('persona-video'),
@@ -108,7 +102,15 @@
     Be sure to replace `kfl_sk_live...` with your actual Keyframe API key.
   </Step>
   <Step title="Replace the placeholder Keyframe and provider credentials" stepNumber={3}>
+    In the HTML, replace `voiceAgentDetails` with the agent or LLM provider details from the prerequisites, and `sessionDetails` with the values returned from the Keyframe API.
+
+    ```html
+    // Replace with the ephemeral credentials returned by the Keyframe API
+    const sessionDetails = {};
     
+    // Replace with your provider values from the prerequisites
+    const voiceAgentDetails = {};
+    ```
   </Step>
   <Step title="Start a local server" stepNumber={4}>
     <Tabs>
@@ -137,5 +139,5 @@
 You're successfully connected a Keyframe persona to your provider. A couple notes:
 
 - You exchanged your Keyframe API key for an ephemeral Keyframe session token
-- In the steps above, we "hardcoded" provider (agent / LLM) credentials. In production you'd want to generate these ephemerally
+- The steps above "hardcoded" provider (agent / LLM) credentials; in production you'd want to generate these ephemerally
 - The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your persona
