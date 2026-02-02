@@ -47,7 +47,8 @@
                 "expanded": true,
                 "pages": [
                   "guides/integration/agent-frameworks/cartesia-line",
-                  "guides/integration/agent-frameworks/elevenlabs-agents"
+                  "guides/integration/agent-frameworks/elevenlabs-agents",
+                  "guides/integration/agent-frameworks/vapi"
                 ]
               },
               {

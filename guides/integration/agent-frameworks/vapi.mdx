@@ -1,0 +1,29 @@
+---
+title: "Vapi"
+description: "Integrate a Keyframe persona with a Vapi assistant"
+---
+
+import ElementsSteps from '/snippets/elements-steps.mdx';
+
+## Prerequisites
+
+To use Vapi as your agent provider, you'll need:
+
+- The assistant ID from Vapi of the assistant you wish to use
+- [A signed URL from Vapi for the chosen assistant](https://docs.vapi.ai/calls/websocket-transport#creating-a-websocket-call)
+
+### Prepare your Vapi agent provider details
+
+Now that you have your agent details, take a note of the following snippet:
+
+```typescript
+type VoiceAgentDetails = {
+  type: 'vapi';
+  agent_id?: '<your_vapi_assistant_id>';
+  signed_url?: '<your_vapi_assistant_signed_url>';
+};
+```
+
+We'll be using this snippet in the steps to follow.
+
+<ElementsSteps />
