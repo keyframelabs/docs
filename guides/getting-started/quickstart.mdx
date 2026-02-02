@@ -47,6 +47,22 @@ The Keyframe API and SDKs provide simple interfaces for adding personas to AI ag
     };
     ```
   </Tab>
+  <Tab title="Vapi">
+    To use Vapi as your agent provider, you'll need:
+
+    - The assistant ID from Vapi of the assistant you wish to use
+    - [A signed URL from Vapi for the chosen assistant](https://docs.vapi.ai/calls/websocket-transport#creating-a-websocket-call)
+
+    And then we'll use this snippet in the steps to follow:
+
+    ```typescript
+    type VoiceAgentDetails = {
+      type: 'vapi';
+      agent_id?: '<your_vapi_assistant_id>';
+      signed_url?: '<your_vapi_assistant_signed_url>';
+    };
+    ```
+  </Tab>
   <Tab title="Gemini Live">
     <Warning>
       Gemini Live support is currently in closed alpha. [Contact us](mailto:support@keyframelabs.com) if you'd like early access.
