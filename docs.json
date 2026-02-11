@@ -42,6 +42,7 @@
             "expanded": true,
             "pages": [
               "guides/integration/overview",
+              "guides/integration/integration-capability-matrix",
               {
                 "group": "Agent frameworks",
                 "expanded": true,

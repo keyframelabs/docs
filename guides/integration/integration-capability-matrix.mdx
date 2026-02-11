@@ -1,0 +1,16 @@
+---
+title: "Integration capability matrix"
+description: "Choose the right integration for your desired model capability"
+---
+
+Some integrations may not fully utilize the capabilities of our models.
+
+For example, `persona-1.5-live` is designed to pair with highly expressive voice output (e.g. EvelnLabs v3). As such, if the upstream voice signal has limited prosody or emotional range, our model won't automatically render its full expressive range.
+
+| Provider          | persona-1.5-live                     | persona-1-live |
+| :---------------- | :----------------------------------- | :------------- |
+| Cartesia Line     | ⚠️ You must manually control emotion | 💯             |
+| ElevenLabs Agents | 💯 if using v3+                      | 💯             |
+| Vapi              | ⚠️ You must manually control emotion | 💯             |
+| Gemini Live       | ⚠️ You must manually control emotion | 💯             |
+| OpenAI Realtime   | ⚠️ You must manually control emotion | 💯             |
