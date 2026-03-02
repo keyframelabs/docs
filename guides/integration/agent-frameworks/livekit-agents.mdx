@@ -1,0 +1,108 @@
+---
+title: "LiveKit Agents"
+description: "Integrate a Keyframe persona with a LiveKit agent"
+---
+
+## Prerequisites
+
+- Your own existing LiveKit Voice AI application, or
+- Follow the [LiveKit Voice AI quickstart](https://docs.livekit.io/agents/start/voice-ai-quickstart/) to create one
+
+## Integration guide
+
+<Steps>
+  <Step title="Install the plugin">
+    Within your LiveKit Agents app, install the plugin:
+
+    ```shellscript
+    uv add "livekit-agents[keyframe]~=1.4"
+    ```
+  </Step>
+  <Step title="Authenticate">
+    1. Create a [Keyframe API key](https://platform.keyframelabs.com/)
+    2. In your LiveKit Agents app, set `KEYFRAME_API_KEY` in your `.env` file
+  </Step>
+  <Step title="Add AvatarSession to AgentSession">
+    ```python
+    from livekit import agents
+    from livekit.agents import AgentServer, AgentSession
+    from livekit.plugins import keyframe # [!code ++]
+    
+    server = AgentServer()
+    
+    @server.rtc_session(agent_name="my-agent")
+    async def my_agent(ctx: agents.JobContext):
+        session = AgentSession(
+            # ... stt, llm, tts, etc.
+        )
+    
+        avatar = keyframe.AvatarSession(
+            persona_slug="public:cosmo_persona-1.5-live",  # or use persona_id. See "Persona setup" for details.
+        )
+    
+        # Start the avatar and wait for it to join
+        await avatar.start(session, room=ctx.room)
+    
+        # Start your agent session with the user
+        await session.start(
+            # ... room, agent, room_options, etc.
+        )
+    ```
+
+    Preview the persona in the [Agents Playground ](https://docs.livekit.io/agents/start/playground/)or a frontend [starter app](https://docs.livekit.io/frontends/start/starter-apps/) that you build.
+  </Step>
+</Steps>
+
+## Persona setup
+
+The Keyframe plugin requires selection of a persona for each session. You can specify the persona by ID or by slug, passed by `persona_id` or `persona_slug` respectively. You must provide exactly one of these.
+
+#### Persona slug
+
+A slug is a human-readable identifier in the format `"public:<persona_name>"`. Browse available public personas at the [Keyframe platform](https://platform.keyframelabs.com).
+
+#### Persona ID
+
+A persona ID is a UUID that uniquely identifies a persona. You can find persona IDs in the  [Keyframe platform](https://platform.keyframelabs.com).
+
+## Programmatic emotion control
+
+<Info>
+  `persona-1.5-live`  **personas** **only**
+
+  Emotion control is only available for personas powered by `persona-1.5-live`.
+</Info>
+
+The Keyframe plugin supports dynamic emotion control. You can change the avatar's facial expression at any time during a conversation using `set_emotion()`:
+
+```python
+await avatar.set_emotion("happy")  # "neutral", "happy", "sad", "angry"
+```
+
+To let the LLM control the avatar's expression automatically, register it as a function tool on your agent:
+
+```python
+from livekit.agents import Agent, RunContext, function_tool
+from livekit.plugins.keyframe import Emotion
+
+class AvatarAgent(Agent):
+    def __init__(self, avatar: keyframe.AvatarSession) -> None:
+        super().__init__(
+            instructions=(
+                "You are a friendly voice assistant with an avatar. "
+                "Use the set_emotion tool to change your facial expression "
+                "whenever the conversation mood shifts."
+            ),
+        )
+        self._avatar = avatar
+
+    @function_tool()
+    async def set_emotion(self, context: RunContext, emotion: Emotion) -> str:
+        """Set the avatar's facial expression to match the conversation mood.
+
+        Args:
+            emotion: The emotion to express. One of 'neutral', 'happy', 'sad', or 'angry'.
+        """
+        await self._avatar.set_emotion(emotion)
+        return f"Emotion set to {emotion}"
+```
