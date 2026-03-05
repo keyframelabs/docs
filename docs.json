@@ -12,9 +12,19 @@
     "global": {
       "anchors": [
         {
+          "anchor": "Main site",
+          "icon": "globe",
+          "href": "https://www.keyframelabs.com"
+        },
+        {
           "anchor": "Demo",
           "icon": "laptop",
           "href": "https://demo.keyframelabs.com"
+        },
+        {
+          "anchor": "Platform dashboard",
+          "icon": "table-layout",
+          "href": "https://platform.keyframelabs.com"
         }
       ]
     },
