@@ -111,7 +111,8 @@
     "socials": {
       "github": "https://github.com/keyframelabs",
       "linkedin": "https://www.linkedin.com/company/keyframe-labs-inc",
-      "website": "https://keyframelabs.com"
+      "website": "https://keyframelabs.com",
+      "x": "https://x.com/KeyframeLabs"
     }
   },
   "background": {
@@ -120,5 +121,8 @@
       "dark": "#000000"
     }
   },
-  "description": "Add real-time, expressive personas to your AI agents and applications. Explore resources, tutorials, API docs, and dynamic examples to get the most out of Keyframe Lab's developer platform."
+  "description": "Add real-time, expressive personas to your AI agents and applications. Explore resources, tutorials, API docs, and dynamic examples to get the most out of Keyframe Lab's developer platform.",
+  "seo": {
+    "indexing": "navigable"
+  }
 }
