@@ -48,11 +48,15 @@
             ]
           },
           {
+            "group": "Integrate",
+            "pages": [
+              "guides/integrate/overview"
+            ]
+          },
+          {
             "group": "Self Managed",
             "expanded": true,
             "pages": [
-              "guides/self-managed/overview",
-              "guides/self-managed/integration-capability-matrix",
               {
                 "group": "Agent frameworks",
                 "expanded": true,
