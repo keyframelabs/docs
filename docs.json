@@ -50,7 +50,8 @@
           {
             "group": "Integrate",
             "pages": [
-              "guides/integrate/overview"
+              "guides/integrate/overview",
+              "guides/integrate/self-managed"
             ]
           },
           {

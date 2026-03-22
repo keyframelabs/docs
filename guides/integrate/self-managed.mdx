@@ -1,0 +1,68 @@
+---
+title: "Self Managed"
+description: "Best if you want maximum control"
+---
+
+For the self managed pipeline, Keyframe personas integrate with both agent frameworks (e.g., Cartesia, ElevenLabs, LiveKit, Vapi) and real-time LLMs (e.g., Gemini Live, OpenAI Realtime). While each integration has minor setup differences, the overall flow is largely the same.
+
+## Pipeline overview
+
+<Steps>
+  <Step title="Bring your own agent or LLM">
+    Your client application continues to interface with your existing agent framework or real-time LLM
+  </Step>
+  <Step title="Keyframe no-code or low-code components">
+    Our easy-to-use components recieve "raw" audio from your agent or LLM, and relays it to the Keyframe platform
+  </Step>
+  <Step title="Rendered persona">
+    The Keyframe components also manage rendering the generated persona in your client application
+  </Step>
+</Steps>
+
+```text
++---------------------+                                     +--------------------------+
+|                     | ----------- User input -----------> |                          |
+|                     |                                     |    Your existing agent   |
+|                     | <----- Raw agent / LLM audio ------ |         or LLM           |
+|                     |       (will now be "relayed")       |                          |
+|                     |                                     +--------------------------+
+|   Your client app   |
+|                     |                                     +--------------------------+
+|                     | ---- Relayed agent / LLM audio ---> |                          |
+|                     |                                     |         Keyframe         |
+|                     | <------- Rendered persona --------- |         platform         |
+|                     |    (w/ synced audio and video)      |                          |
++---------------------+                                     +--------------------------+
+```
+
+## Supported agent frameworks
+
+<Columns cols={2}>
+  <Card title="Cartesia Line" href="/guides/self-managed/agent-frameworks/cartesia-line">
+    Add personas to your Cartesia agents with our components
+  </Card>
+
+  <Card title="ElevenLabs Agents" href="/guides/self-managed/agent-frameworks/elevenlabs-agents">
+    Add personas to your ElevenLabs agents with our components
+  </Card>
+
+  <Card title="LiveKit Agents" href="/guides/self-managed/agent-frameworks/livekit-agents">
+    Add personas to your LiveKit agents with just a few lines of code
+  </Card>
+
+  <Card title="Vapi" href="/guides/self-managed/agent-frameworks/vapi">
+    Add personas to your Vapi assistants with our components
+  </Card>
+</Columns>
+
+## Supported real-time LLMs
+
+<Columns cols={2}>
+  <Card title="Gemini Live" href="/guides/self-managed/real-time-llms/gemini-live">
+    Add personas to your Gemini Live applications with our components
+  </Card>
+
+  <Card title="OpenAI Realtime" href="/guides/self-managed/real-time-llms/openai-realtime">
+    Add personas to your OpenAI Realtime applications with our components
+  </Card>
+</Columns>
