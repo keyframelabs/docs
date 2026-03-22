@@ -48,27 +48,27 @@
             ]
           },
           {
-            "group": "Integration",
+            "group": "Self Managed",
             "expanded": true,
             "pages": [
-              "guides/integration/overview",
-              "guides/integration/integration-capability-matrix",
+              "guides/self-managed/overview",
+              "guides/self-managed/integration-capability-matrix",
               {
                 "group": "Agent frameworks",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/agent-frameworks/cartesia-line",
-                  "guides/integration/agent-frameworks/elevenlabs-agents",
-                  "guides/integration/agent-frameworks/livekit-agents",
-                  "guides/integration/agent-frameworks/vapi"
+                  "guides/self-managed/agent-frameworks/cartesia-line",
+                  "guides/self-managed/agent-frameworks/elevenlabs-agents",
+                  "guides/self-managed/agent-frameworks/livekit-agents",
+                  "guides/self-managed/agent-frameworks/vapi"
                 ]
               },
               {
                 "group": "Real-time LLMs",
                 "expanded": true,
                 "pages": [
-                  "guides/integration/real-time-llms/gemini-live",
-                  "guides/integration/real-time-llms/openai-realtime"
+                  "guides/self-managed/real-time-llms/gemini-live",
+                  "guides/self-managed/real-time-llms/openai-realtime"
                 ]
               }
             ]
