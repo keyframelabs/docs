@@ -24,6 +24,27 @@ For hosted pipelines, Keyframe personas integrate with both agent frameworks (e.
   </Step>
 </Steps>
 
+```text
++---------------------+                                     +--------------------------+
+|                     | ----------- User input -----------> |                          |
+|                     |                                     |    Your existing agent   |
+|                     | <----- Raw agent / LLM audio ------ |         or LLM           |
+|                     |       (will now be "relayed")       |                          |
+|                     |                                     +--------------------------+
+|                     |                                                   |
+|                     |                                         Keyframe uses shared 
+|   Your client app   |                                      credentials to manage client 
+|  w/ low-code comp.  |                                      connections to agent or LLM,
+|                     |                                      enabling low-code components
+|                     |                                                   |
+|                     |                                     +--------------------------+
+|                     | ---- Relayed agent / LLM audio ---> |                          |
+|                     |                                     |         Keyframe         |
+|                     | <------- Rendered persona --------- |         platform         |
+|                     |    (w/ synced audio and video)      |                          |
++---------------------+                                     +--------------------------+
+```
+
 ## Supported agent frameworks
 
 <Columns cols={2}>
