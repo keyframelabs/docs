@@ -61,7 +61,7 @@
               {
                 "group": "Agent frameworks",
                 "pages": [
-                  "eleven-labs-agents"
+                  "guides/hosted/agent-frameworks/elevenlabs-agents"
                 ]
               }
             ]
