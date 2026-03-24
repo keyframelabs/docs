@@ -45,20 +45,15 @@ title: "Hosted Steps"
       </body>
     
       <script type="module">
-        import { PersonaView } from 'https://esm.sh/@keyframelabs/elements@latest';
+        import { PersonaEmbed } from 'https://esm.sh/@keyframelabs/elements@latest';
     
-        // Replace with ephemeral credentials returned by the Keyframe API
-        const sessionDetails = {};
-    
-    	// Replace with provider values
-        const voiceAgentDetails = {};
-    
-        const view = new PersonaView({
-          container: document.getElementById('persona-video'),
-          sessionDetails,
-          voiceAgentDetails,
-          videoFit: 'contain',
-          onStateChange: (status) => console.log('Status:', status),
+        const publishableKey = 'kfl_pk_live_...';
+    	
+        const embed = new PersonaEmbed({
+      	  container: document.getElementById('persona-video'),
+      	  publishableKey: publishableKey,
+      	  videoFit: 'contain',
+      	  onStateChange: (status) => console.log('Status:', status),
           onAgentStateChange: (state) => console.log('Agent:', state),
           onDisconnect: () => console.log('Disconnected'),
           onError: (err) => console.error(err),
@@ -91,38 +86,14 @@ title: "Hosted Steps"
     ```
   </Step>
   <Step title="Replace placeholder provider credentials" stepNumber={2}>
-    In the HTML, replace `voiceAgentDetails` with the agent or LLM provider details from the prerequisites.
+    In the HTML, replace `publishableKey `with the  one generated in the prerequisites.
 
     ```html
-    // Replace with your provider values from the prerequisites
+    // Replace with key generated in the prerequisites
     const voiceAgentDetails = {};
     ```
   </Step>
-  <Step title="Generate ephemeral Keyframe credentials" stepNumber={3}>
-    <Tabs>
-      <Tab title="cURL">
-        ```shellscript
-        curl -X POST "https://api.keyframelabs.com/v1/sessions" \
-          -H "Authorization: Bearer kfl_sk_live_..." \
-          -H "Content-Type: application/json" \
-          -d '{
-            "persona_slug": "public:kai"
-          }'
-        ```
-      </Tab>
-    </Tabs>
-
-    Be sure to replace `kfl_sk_live...` with your actual Keyframe API key.
-  </Step>
-  <Step title="Replace the placeholder Keyframe credentials" stepNumber={4}>
-    In the HTML, replace `sessionDetails` with the values returned from the Keyframe API.
-
-    ```html
-    // Replace with the ephemeral credentials returned by the Keyframe API
-    const sessionDetails = {};
-    ```
-  </Step>
-  <Step title="Start a local server" stepNumber={5}>
+  <Step title="Start a local server" stepNumber={3}>
     <Tabs>
       <Tab title="node">
         ```shellscript
@@ -136,7 +107,7 @@ title: "Hosted Steps"
       </Tab>
     </Tabs>
   </Step>
-  <Step title="Open and test" stepNumber={6}>
+  <Step title="Open and test" stepNumber={4}>
     1. Navigate to `http://localhost:8000` in your browser
     2. Allow microphone access when prompted
     3. Your persona will appear automatically and you can start talking
@@ -147,7 +118,3 @@ title: "Hosted Steps"
 ## Summary
 
 Congratulations on your first video call with a Keyframe persona. A couple things worth highlighting:
-
-- You exchanged your Keyframe API key for ephemeral Keyframe session credentials
-- The steps above "hardcoded" provider credentials—in production you'd want to generate these ephemerally
-- The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your persona
