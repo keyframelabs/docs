@@ -51,6 +51,7 @@
             "group": "Integrate",
             "pages": [
               "guides/integrate/overview",
+              "guides/integrate/hosted",
               "guides/integrate/self-managed"
             ]
           },

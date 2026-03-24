@@ -1,0 +1,65 @@
+---
+title: "Hosted"
+description: "Best if you have an existing agent or LLM in production"
+---
+
+A hosted pipeline allows you to bring your own agent or LLM while still getting a batteries-included, configurable embed with an optimized speech-to-video experience, via the low-code  `PersonaEmbed`. Hosted pipelines require you to share your agent or LLM credentials with Keyframe's platform.
+
+For hosted pipelines, Keyframe personas integrate with both agent frameworks (e.g., Cartesia, ElevenLabs, Vapi) and real-time LLMs (e.g., Gemini Live, OpenAI Realtime). While each integration has minor setup differences, the overall flow is largely the same.
+
+## Pipeline overview
+
+<Steps>
+  <Step title="Bring your own agent or LLM">
+    Your client application continues to interface with your existing agent  or real-time LLM (though Keyframe will now manage the connection on your behalf)
+  </Step>
+  <Step title="Share your agent or LLM credentials with Keyframe">
+    To use low-code components like `PersonaEmbed`, the Keyframe platform needs the agent or LLM credentials you currently use to manage client connections
+  </Step>
+  <Step title="Keyframe low-code components">
+    You'll receive a publishable key to configure low-code components like `PersonaEmbed`, which you can  drop in to our application. Keyframe then manages client connections to both your agent or LLM and the Keyframe platform — receiving "raw" audio from your agent or LLM, and relaying it to the Keyframe platform
+  </Step>
+  <Step title="Rendered persona">
+    The Keyframe low-code components also manage rendering the generated persona in your client application
+  </Step>
+</Steps>
+
+## Supported agent frameworks
+
+<Columns cols={2}>
+  <Column>
+    <Card title="Cartesia Line">
+      Add personas to your Cartesia agents with our low-code components
+    </Card>
+  </Column>
+  <Column>
+    <Card title="ElevenLabs Agents">
+      Add personas to your ElevenLabs agents with our low-code components
+    </Card>
+  </Column>
+</Columns>
+
+<Columns cols={2}>
+  <Column>
+    <Card title="Vapi">
+      Add personas to your Vapi assistants with our low-code components
+    </Card>
+  </Column>
+  <Column>
+  </Column>
+</Columns>
+
+## Supported real-time LLMs
+
+<Columns cols={2}>
+  <Column>
+    <Card title="Gemini Live">
+      Add personas to your Gemini Live applications with our low-code components
+    </Card>
+  </Column>
+  <Column>
+    <Card title="OpenAI Realtime">
+      Add personas to your OpenAI Realtime applications with our low-code components
+    </Card>
+  </Column>
+</Columns>
