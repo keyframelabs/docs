@@ -78,8 +78,7 @@
                 "pages": [
                   "guides/self-managed/agent-frameworks/cartesia-line",
                   "guides/self-managed/agent-frameworks/elevenlabs-agents",
-                  "guides/self-managed/agent-frameworks/livekit-agents",
-                  "guides/self-managed/agent-frameworks/vapi"
+                  "guides/self-managed/agent-frameworks/livekit-agents"
                 ]
               },
               {
