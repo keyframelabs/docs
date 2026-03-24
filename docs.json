@@ -57,9 +57,11 @@
           },
           {
             "group": "Hosted",
+            "expanded": true,
             "pages": [
               {
                 "group": "Agent frameworks",
+                "expanded": true,
                 "pages": [
                   "guides/hosted/agent-frameworks/elevenlabs-agents"
                 ]
