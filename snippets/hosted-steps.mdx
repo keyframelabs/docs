@@ -3,7 +3,31 @@ title: "Hosted Steps"
 ---
 
 <Steps>
-  <Step title="Create the HTML" stepNumber={1}>
+  <Step title="Create a new hosted agent in the Keyframe platform" stepNumber={1}>
+    Navigate to the [agents & deployments page](https://platform.keyframelabs.com/agents-and-deployments), and click `Create new`.
+
+    ![Image](/images/image.png)
+
+    Select a persona and the appropriate provider,  adding the provider credentials highlighted in the prerequisites.
+
+    <img
+      src="/images/image-1.png"
+      alt="Image"
+      title="Image"
+      style={{ width:"35%" }}
+    />
+
+    Add to `Allowed Origins` the client URLs you'd like to authorize for your publishable key.
+
+    <img
+      src="/images/image-2.png"
+      alt="Image"
+      style={{ width:"35%" }}
+    />
+
+    Click `Create deployment`, and copy the generated publishable key.
+  </Step>
+  <Step title="Create the HTML" stepNumber={2}>
     ```html expandable
     <!DOCTYPE html>
     <html lang="en">
@@ -85,15 +109,15 @@ title: "Hosted Steps"
     </html>
     ```
   </Step>
-  <Step title="Replace placeholder provider credentials" stepNumber={2}>
+  <Step title="Replace placeholder provider credentials" stepNumber={3}>
     In the HTML, replace `publishableKey `with the  one generated in the prerequisites.
 
     ```html
-    // Replace with key generated in the prerequisites
+    // Replace with key generated in step 1
     const publishableKey = 'kfl_pk_live_...';
     ```
   </Step>
-  <Step title="Start a local server" stepNumber={3}>
+  <Step title="Start a local server" stepNumber={4}>
     <Tabs>
       <Tab title="node">
         ```shellscript
@@ -107,7 +131,7 @@ title: "Hosted Steps"
       </Tab>
     </Tabs>
   </Step>
-  <Step title="Open and test" stepNumber={4}>
+  <Step title="Open and test" stepNumber={5}>
     1. Navigate to `http://localhost:8000` in your browser
     2. Allow microphone access when prompted
     3. Your persona will appear automatically and you can start talking
