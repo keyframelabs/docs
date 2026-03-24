@@ -56,6 +56,17 @@
             ]
           },
           {
+            "group": "Hosted",
+            "pages": [
+              {
+                "group": "Agent frameworks",
+                "pages": [
+                  "eleven-labs-agents"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Self managed",
             "expanded": true,
             "pages": [
