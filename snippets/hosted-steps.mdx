@@ -65,7 +65,7 @@ title: "Hosted Steps"
         startBtn.addEventListener('click', async () => {
           try {
             startBtn.disabled = true;
-            await view.connect();
+            await embed.connect();
             stopBtn.disabled = false;
           } catch (err) {
             console.error('Connect failed:', err);
@@ -75,7 +75,7 @@ title: "Hosted Steps"
     
         stopBtn.addEventListener('click', async () => {
           try {
-            await view.disconnect();
+            await embed.disconnect();
           } finally {
             stopBtn.disabled = true;
             startBtn.disabled = false;
