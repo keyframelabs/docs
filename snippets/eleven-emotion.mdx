@@ -1,0 +1,60 @@
+---
+title: "Eleven Emotion"
+---
+
+### Recommended: modify your ElevenLabs agent to support emotion control
+
+<Steps>
+  <Step title="Add a client tool to your agent">
+    <Frame>
+      ![Image(1)](/images/image\(1\).png)
+    </Frame>
+  </Step>
+  <Step title="In the client tool configurator, add the following JSON to automatically configure the tool">
+    Note: click `Edit as JSON` at the bottom of the configurator
+
+    ```json expandable
+    {
+      "type": "client",
+      "name": "set_emotion",
+      "description": "Set the avatar's emotional expression to match the current conversational tone. This is required to be done for every response.",
+      "disable_interruptions": false,
+      "force_pre_tool_speech": "auto",
+      "tool_call_sound": null,
+      "tool_call_sound_behavior": "auto",
+      "tool_error_handling_mode": "auto",
+      "execution_mode": "immediate",
+      "assignments": [],
+      "expects_response": false,
+      "response_timeout_secs": 1,
+      "parameters": [
+        {
+          "id": "emotion",
+          "type": "string",
+          "value_type": "llm_prompt",
+          "description": "The emotion to express. One of: neutral, angry, sad, happy",
+          "dynamic_variable": "",
+          "constant_value": "",
+          "enum": [
+            "happy",
+            "sad",
+            "angry",
+            "neutral"
+          ],
+          "is_system_provided": false,
+          "required": true
+        }
+      ],
+      "dynamic_variables": {
+        "dynamic_variable_placeholders": {}
+      },
+      "response_mocks": []
+    }
+    ```
+  </Step>
+  <Step title="Now navigate to the agent's tools tab, and enable the newly created tool ">
+    <Frame>
+      ![Image(3)](/images/image\(3\).png)
+    </Frame>
+  </Step>
+</Steps>
