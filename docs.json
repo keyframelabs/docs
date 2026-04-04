@@ -70,7 +70,7 @@
               {
                 "group": "Real-time LLMs",
                 "pages": [
-                  "openai-realtime"
+                  "guides/hosted/agent-frameworks/openai-realtime"
                 ]
               }
             ]
