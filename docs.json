@@ -66,6 +66,12 @@
                 "pages": [
                   "guides/hosted/agent-frameworks/elevenlabs-agents"
                 ]
+              },
+              {
+                "group": "Real-time LLMs",
+                "pages": [
+                  "openai-realtime"
+                ]
               }
             ]
           },
