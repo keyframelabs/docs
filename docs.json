@@ -76,7 +76,6 @@
                 "group": "Agent frameworks",
                 "expanded": true,
                 "pages": [
-                  "guides/self-managed/agent-frameworks/cartesia-line",
                   "guides/self-managed/agent-frameworks/elevenlabs-agents",
                   "guides/self-managed/agent-frameworks/livekit-agents"
                 ]
@@ -85,7 +84,6 @@
                 "group": "Real-time LLMs",
                 "expanded": true,
                 "pages": [
-                  "guides/self-managed/real-time-llms/gemini-live",
                   "guides/self-managed/real-time-llms/openai-realtime"
                 ]
               }
