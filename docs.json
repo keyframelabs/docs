@@ -37,6 +37,7 @@
             "expanded": true,
             "pages": [
               "index",
+              "guides/getting-started/quickstart-hosted",
               "guides/getting-started/quickstart-self-managed",
               "guides/getting-started/get-your-api-key"
             ]
