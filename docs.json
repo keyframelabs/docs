@@ -69,6 +69,7 @@
               },
               {
                 "group": "Real-time LLMs",
+                "expanded": true,
                 "pages": [
                   "guides/hosted/agent-frameworks/openai-realtime"
                 ]
