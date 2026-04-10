@@ -9,7 +9,21 @@ import ElementsSteps from '/snippets/elements-steps.mdx';
 
 ## Prerequisites
 
-- The OpenAI API key you currently use to manage client connections
+- [An ephemeral token](https://developers.openai.com/api/docs/guides/realtime-webrtc#creating-an-ephemeral-token) for your desired Realtime session configuration
+
+### Prepare your OpenAI Realtime agent provider details
+
+Now that you have your agent details, take a note of the following snippet:
+
+```typescript
+type VoiceAgentDetails = {
+  type: 'openai';
+  token?: string;
+  system_prompt?: string;
+};
+```
+
+We'll be using this snippet in the steps to follow.
 
 ## Creating a persona powered by OpenAI Realtime
 
