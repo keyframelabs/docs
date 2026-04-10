@@ -43,7 +43,15 @@ The Keyframe API and SDKs provide simple interfaces for adding personas to AI ag
   <Tab title="OpenAI Realtime">
     To use OpenAI Realtime as your real-time LLM provider, you'll need:
 
-    - The OpenAI API key you currently use to manage client connections
+    - [An ephemeral token](https://developers.openai.com/api/docs/guides/realtime-webrtc#creating-an-ephemeral-token) for your desired Realtime session configuration
+
+    ```typescript
+    type VoiceAgentDetails = {
+      type: 'openai';
+      token?: string;
+      system_prompt?: string;
+    };
+    ```
   </Tab>
 </Tabs>
 
