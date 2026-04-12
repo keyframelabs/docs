@@ -8,6 +8,11 @@
     "dark": "#342E2E"
   },
   "favicon": "/favicon.svg",
+  "integrations": {
+    "posthog": {
+      "apiKey": "phc_rgXSAgMfHe4yG3S67fbxcvCrkVs5unH4JPfxtg47thnC"
+    }
+  },
   "navigation": {
     "global": {
       "anchors": [
