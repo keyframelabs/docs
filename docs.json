@@ -28,11 +28,86 @@
         }
       ]
     },
-    "anchors": [
+    "tabs": [
       {
-        "anchor": "Discord",
-        "icon": "comment-dots",
-        "href": "https://discord.gg/f5HPSY5D"
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Getting started",
+            "expanded": true,
+            "pages": [
+              "index",
+              "guides/getting-started/quickstart-hosted",
+              "guides/getting-started/quickstart-self-managed",
+              "guides/getting-started/get-your-api-key"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "guides/resources/persona-library"
+            ]
+          },
+          {
+            "group": "Integrate",
+            "pages": [
+              "guides/integrate/overview",
+              "guides/integrate/hosted",
+              "guides/integrate/self-managed"
+            ]
+          },
+          {
+            "group": "Hosted",
+            "expanded": true,
+            "pages": [
+              {
+                "group": "Agent frameworks",
+                "expanded": true,
+                "pages": [
+                  "guides/hosted/agent-frameworks/elevenlabs-agents"
+                ]
+              },
+              {
+                "group": "Real-time LLMs",
+                "expanded": true,
+                "pages": [
+                  "guides/hosted/agent-frameworks/openai-realtime"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Self managed",
+            "expanded": true,
+            "pages": [
+              {
+                "group": "Agent frameworks",
+                "expanded": true,
+                "pages": [
+                  "guides/self-managed/agent-frameworks/elevenlabs-agents",
+                  "guides/self-managed/agent-frameworks/livekit-agents"
+                ]
+              },
+              {
+                "group": "Real-time LLMs",
+                "expanded": true,
+                "pages": [
+                  "guides/self-managed/real-time-llms/openai-realtime"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API reference",
+        "openapi": "/api-reference/v1/openapi.json"
+      },
+      {
+        "tab": "SDK reference",
+        "pages": [
+          "sdk-reference/javascript"
+        ]
       }
     ]
   },
