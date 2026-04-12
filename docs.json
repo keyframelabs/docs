@@ -25,6 +25,11 @@
           "anchor": "Platform dashboard",
           "icon": "table-layout",
           "href": "https://platform.keyframelabs.com"
+        },
+        {
+          "anchor": "Discord",
+          "icon": "comment-dots",
+          "href": "https://discord.gg/f5HPSY5D"
         }
       ]
     },
