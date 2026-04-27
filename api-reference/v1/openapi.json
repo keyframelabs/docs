@@ -105,7 +105,6 @@
           { "bearerAuth": [] }
         ],
         "summary": "Create meet bot",
-        "description": "Spawn a bot that joins a meeting (Google Meet, Zoom, or Microsoft Teams) using the configured persona.",
         "requestBody": {
           "required": true,
           "content": {
