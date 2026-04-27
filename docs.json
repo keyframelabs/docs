@@ -63,7 +63,8 @@
             "pages": [
               "guides/integrate/overview",
               "guides/integrate/hosted",
-              "guides/integrate/self-managed"
+              "guides/integrate/self-managed",
+              "guides/integrate/meetings-zoom-meet-teams"
             ]
           },
           {
@@ -111,7 +112,7 @@
       },
       {
         "tab": "API reference",
-        "openapi": "/api-reference/v1/openapi.json"
+        "openapi": "api-reference/v1/openapi.json"
       },
       {
         "tab": "SDK reference",

@@ -1,0 +1,415 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Sessions API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.keyframelabs.com/v1"
+    }
+  ],
+  "paths": {
+    "/sessions": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "operationId": "createSession",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Create session",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSessionResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Model not allowed for plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "modelNotAllowed": {
+                    "value": {
+                      "detail": "Plan 'free' does not support model persona-1.5-live"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "No capacity available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "busy": {
+                    "value": {
+                      "detail": "Our servers are busy. Please try again in a moment."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "internal": {
+                    "value": {
+                      "detail": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meet-bot": {
+      "post": {
+        "tags": ["Sessions"],
+        "operationId": "createMeetBot",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "summary": "Create meet bot",
+        "description": "Spawn a bot that joins a meeting (Google Meet, Zoom, or Microsoft Teams) using the configured persona.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMeetBotRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Meet bot created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateMeetBotResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Model not allowed for plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "modelNotAllowed": {
+                    "value": {
+                      "detail": "Plan 'free' does not support model persona-1.5-live"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "No capacity available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "busy": {
+                    "value": {
+                      "detail": "Our servers are busy. Please try again in a moment."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "internal": {
+                    "value": {
+                      "detail": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "CreateSessionRequest": {
+        "description": "Request to create a session. Choose either ID or Slug.",
+        "oneOf": [
+          {
+            "title": "By Persona ID",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "persona_id"
+            ],
+            "properties": {
+              "persona_id": {
+                "type": "string",
+                "description": "ID of persona to use"
+              }
+            }
+          },
+          {
+            "title": "By Persona Slug",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "persona_slug"
+            ],
+            "properties": {
+              "persona_slug": {
+                "type": "string",
+                "description": "Slug of persona to use"
+              }
+            }
+          }
+        ]
+      },
+      "CreateSessionResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "server_url",
+          "participant_token",
+          "agent_identity"
+        ],
+        "properties": {
+          "server_url": {
+            "type": "string",
+            "description": "WebRTC connection URL",
+            "examples": [
+              "wss://..."
+            ]
+          },
+          "participant_token": {
+            "type": "string",
+            "description": "JWT for 'source' participant to pass audio to persona"
+          },
+          "agent_identity": {
+            "type": "string",
+            "description": "Identity of the persona in the WebRTC session",
+            "examples": [
+              "agent"
+            ]
+          }
+        }
+      },
+      "CreateMeetBotRequest": {
+        "description": "Request to create a Meet bot. Provide exactly one of persona_id or persona_slug.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "meeting_url",
+          "recall_api_key"
+        ],
+        "properties": {
+          "meeting_url": {
+            "type": "string",
+            "description": "URL of the meeting the bot should join",
+            "examples": [
+              "https://meet.google.com/abc-defg-hij"
+            ]
+          },
+          "recall_api_key": {
+            "type": "string",
+            "description": "Recall.ai API key used to spawn and manage the bot"
+          },
+          "persona_id": {
+            "type": "string",
+            "description": "ID of persona to use"
+          },
+          "persona_slug": {
+            "type": "string",
+            "description": "Slug of persona to use"
+          },
+          "bot_name": {
+            "type": "string",
+            "description": "Display name shown for the bot in the meeting"
+          },
+          "meeting_platform": {
+            "type": "string",
+            "description": "Meeting platform; 'auto' detects from the meeting URL.",
+            "enum": [
+              "auto",
+              "google_meet",
+              "zoom",
+              "microsoft_teams"
+            ],
+            "default": "auto"
+          },
+          "system_prompt": {
+            "type": "string",
+            "description": "System prompt to override the persona's default"
+          },
+          "greeting": {
+            "type": "string",
+            "description": "Greeting the bot speaks when it joins the meeting"
+          },
+          "voice_id": {
+            "type": "string",
+            "description": "Voice ID to override the persona's default voice"
+          },
+          "llm_model": {
+            "type": "string",
+            "description": "LLM model to override the persona's default"
+          },
+          "stt_max_endpoint_delay_ms": {
+            "type": "integer",
+            "description": "Maximum end-of-utterance delay (ms) for the speech-to-text endpointer",
+            "minimum": 0
+          },
+          "stt_language_hints": {
+            "type": "array",
+            "description": "BCP-47 language hints for speech-to-text",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              ["en", "es"]
+            ]
+          },
+          "voice_settings": {
+            "$ref": "#/components/schemas/MeetBotVoiceSettings"
+          }
+        },
+        "oneOf": [
+          {
+            "title": "By Persona ID",
+            "required": ["persona_id"]
+          },
+          {
+            "title": "By Persona Slug",
+            "required": ["persona_slug"]
+          }
+        ]
+      },
+      "MeetBotVoiceSettings": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Optional voice synthesis overrides applied on top of the persona's defaults.",
+        "properties": {
+          "stability": {
+            "type": "number",
+            "description": "Voice stability (provider-specific range)"
+          },
+          "similarity_boost": {
+            "type": "number",
+            "description": "Similarity boost (provider-specific range)"
+          },
+          "speed": {
+            "type": "number",
+            "description": "Speech rate multiplier"
+          }
+        }
+      },
+      "CreateMeetBotResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bot_id",
+          "meeting_url"
+        ],
+        "properties": {
+          "bot_id": {
+            "type": "string",
+            "description": "Recall.ai bot identifier"
+          },
+          "meeting_url": {
+            "type": "string",
+            "description": "URL of the meeting the bot joined"
+          },
+          "meeting_platform": {
+            "type": "string",
+            "description": "Resolved meeting platform",
+            "enum": [
+              "google_meet",
+              "zoom",
+              "microsoft_teams"
+            ]
+          }
+        }
+      },
+      "HTTPExceptionResponse": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "detail"
+        ],
+        "properties": {
+          "detail": {
+            "description": "Error detail",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              },
+              {
+                "type": "array"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

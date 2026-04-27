@@ -1,0 +1,46 @@
+---
+title: "Meetings (Zoom, Meet, Teams)"
+description: "Add Keyframe personas to video meetings"
+---
+
+The [Recall AI](https://recall.ai/) integration allows you to add Keyframe personas to video meetings on **Zoom**, **Google Meet**, and **Microsoft Teams**. The persona joins the meeting as a participant with a camera feed, and meeting audio is piped to the avatar for real-time conversation.
+
+Note that personas added to meetings leverage Keyframe's STT\+LLM\+TTS in addition to video. You'll be able to customize the LLM, TTS and more when you dispatch a persona to a meeting.
+
+## Prerequisites
+
+- [Sign up](https://docs.keyframelabs.com/platform.keyframelabs.com) to the Keyframe Labs platform and [create a new API key](https://docs.keyframelabs.com/guides/getting-started/get-your-api-key)
+- A [Recall AI](https://recall.ai/) API key
+
+## Adding a Keyframe persona to a meeting
+
+<Steps>
+  <Step title="Create a meeting in Zoom, Google Meet, or Microsoft Teams">
+    ![Image](/images/image-3.png)
+
+    You'll need the meeting url for the next step.
+  </Step>
+  <Step title="Configure and dispatch a Keyframe persona to the newly created meeting">
+    ```shellscript
+    curl -X POST "https://api.keyframelabs.com/v1/meet-bot" \
+      -H "Authorization: Bearer $KEYFRAME_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d "{
+        \"meeting_url\": \"https://meet.google.com/xyz-abcd-efg\",
+        \"persona_slug\": \"atlas_persona-1.5-live\",
+        \"recall_api_key\": \"$RECALL_API_KEY\",
+        \"system_prompt\": \"You are a friendly meeting assistant.\",
+        \"greeting\": \"Hey everyone!\"
+    }"
+    ```
+
+    You can see the full list of configurable parameters here.
+  </Step>
+  <Step title="Admit the Keyframe persona">
+    ![Image](/images/image-4.png)
+
+    ![Image](/images/image-6.png)
+
+    Once you close the meeting (or remove the persona participant from the meeting), the associated persona session will close automatically.
+  </Step>
+</Steps>
