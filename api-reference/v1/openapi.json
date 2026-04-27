@@ -252,91 +252,147 @@
         }
       },
       "CreateMeetBotRequest": {
-        "description": "Request to create a Meet bot. Provide exactly one of persona_id or persona_slug.",
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "meeting_url",
-          "recall_api_key"
-        ],
-        "properties": {
-          "meeting_url": {
-            "type": "string",
-            "description": "URL of the meeting the bot should join",
-            "examples": [
-              "https://meet.google.com/abc-defg-hij"
-            ]
-          },
-          "recall_api_key": {
-            "type": "string",
-            "description": "Recall.ai API key used to spawn and manage the bot"
-          },
-          "persona_id": {
-            "type": "string",
-            "description": "ID of persona to use"
-          },
-          "persona_slug": {
-            "type": "string",
-            "description": "Slug of persona to use"
-          },
-          "bot_name": {
-            "type": "string",
-            "description": "Display name shown for the bot in the meeting"
-          },
-          "meeting_platform": {
-            "type": "string",
-            "description": "Meeting platform; 'auto' detects from the meeting URL.",
-            "enum": [
-              "auto",
-              "google_meet",
-              "zoom",
-              "microsoft_teams"
-            ],
-            "default": "auto"
-          },
-          "system_prompt": {
-            "type": "string",
-            "description": "System prompt to override the persona's default"
-          },
-          "greeting": {
-            "type": "string",
-            "description": "Greeting the bot speaks when it joins the meeting"
-          },
-          "voice_id": {
-            "type": "string",
-            "description": "Voice ID to override the persona's default voice"
-          },
-          "llm_model": {
-            "type": "string",
-            "description": "LLM model to override the persona's default"
-          },
-          "stt_max_endpoint_delay_ms": {
-            "type": "integer",
-            "description": "Maximum end-of-utterance delay (ms) for the speech-to-text endpointer",
-            "minimum": 0
-          },
-          "stt_language_hints": {
-            "type": "array",
-            "description": "BCP-47 language hints for speech-to-text",
-            "items": {
-              "type": "string"
-            },
-            "examples": [
-              ["en", "es"]
-            ]
-          },
-          "voice_settings": {
-            "$ref": "#/components/schemas/MeetBotVoiceSettings"
-          }
-        },
+        "description": "Request to create a Meet bot. Choose either Persona ID or Persona Slug.",
         "oneOf": [
           {
             "title": "By Persona ID",
-            "required": ["persona_id"]
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "meeting_url",
+              "recall_api_key",
+              "persona_id",
+              "bot_name",
+              "system_prompt",
+              "greeting",
+              "voice_id",
+              "llm_model"
+            ],
+            "properties": {
+              "meeting_url": {
+                "type": "string",
+                "description": "URL of the meeting the bot should join",
+                "examples": [
+                  "https://meet.google.com/abc-defg-hij"
+                ]
+              },
+              "recall_api_key": {
+                "type": "string",
+                "description": "Recall.ai API key used to spawn and manage the bot"
+              },
+              "persona_id": {
+                "type": "string",
+                "description": "ID of persona to use"
+              },
+              "bot_name": {
+                "type": "string",
+                "description": "Display name shown for the bot in the meeting"
+              },
+              "system_prompt": {
+                "type": "string",
+                "description": "System prompt to override the persona's default"
+              },
+              "greeting": {
+                "type": "string",
+                "description": "Greeting the bot speaks when it joins the meeting"
+              },
+              "voice_id": {
+                "type": "string",
+                "description": "Voice ID to override the persona's default voice"
+              },
+              "llm_model": {
+                "type": "string",
+                "description": "LLM model to override the persona's default"
+              },
+              "stt_max_endpoint_delay_ms": {
+                "type": "integer",
+                "description": "Maximum end-of-utterance delay (ms) for the speech-to-text endpointer",
+                "minimum": 0
+              },
+              "stt_language_hints": {
+                "type": "array",
+                "description": "BCP-47 language hints for speech-to-text",
+                "items": {
+                  "type": "string"
+                },
+                "examples": [
+                  ["en", "es"]
+                ]
+              },
+              "voice_settings": {
+                "$ref": "#/components/schemas/MeetBotVoiceSettings"
+              }
+            }
           },
           {
             "title": "By Persona Slug",
-            "required": ["persona_slug"]
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "meeting_url",
+              "recall_api_key",
+              "persona_slug",
+              "bot_name",
+              "system_prompt",
+              "greeting",
+              "voice_id",
+              "llm_model"
+            ],
+            "properties": {
+              "meeting_url": {
+                "type": "string",
+                "description": "URL of the meeting the bot should join",
+                "examples": [
+                  "https://meet.google.com/abc-defg-hij"
+                ]
+              },
+              "recall_api_key": {
+                "type": "string",
+                "description": "Recall.ai API key used to spawn and manage the bot"
+              },
+              "persona_slug": {
+                "type": "string",
+                "description": "Slug of persona to use"
+              },
+              "bot_name": {
+                "type": "string",
+                "description": "Display name shown for the bot in the meeting"
+              },
+              "system_prompt": {
+                "type": "string",
+                "description": "System prompt to override the persona's default"
+              },
+              "greeting": {
+                "type": "string",
+                "description": "Greeting the bot speaks when it joins the meeting"
+              },
+              "voice_id": {
+                "type": "string",
+                "description": "Voice ID to override the persona's default voice"
+              },
+              "llm_model": {
+                "type": "string",
+                "description": "LLM model to override the persona's default"
+              },
+              "stt_max_endpoint_delay_ms": {
+                "type": "integer",
+                "description": "Maximum end-of-utterance delay (ms) for the speech-to-text endpointer",
+                "minimum": 0
+              },
+              "stt_language_hints": {
+                "type": "array",
+                "description": "BCP-47 language hints for speech-to-text",
+                "items": {
+                  "type": "string"
+                },
+                "examples": [
+                  ["en", "es"]
+                ]
+              },
+              "voice_settings": {
+                "$ref": "#/components/schemas/MeetBotVoiceSettings"
+              }
+            }
           }
         ]
       },
@@ -374,15 +430,6 @@
           "meeting_url": {
             "type": "string",
             "description": "URL of the meeting the bot joined"
-          },
-          "meeting_platform": {
-            "type": "string",
-            "description": "Resolved meeting platform",
-            "enum": [
-              "google_meet",
-              "zoom",
-              "microsoft_teams"
-            ]
           }
         }
       },
