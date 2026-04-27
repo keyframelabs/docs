@@ -290,7 +290,7 @@
               },
               "system_prompt": {
                 "type": "string",
-                "description": "System prompt to override the persona's default"
+                "description": "System prompt for the persona"
               },
               "greeting": {
                 "type": "string",
@@ -298,11 +298,11 @@
               },
               "voice_id": {
                 "type": "string",
-                "description": "Voice ID to override the persona's default voice"
+                "description": "Voice ID for the persona"
               },
               "llm_model": {
                 "type": "string",
-                "description": "LLM model to override the persona's default"
+                "description": "LLM model ID for the persona"
               },
               "stt_max_endpoint_delay_ms": {
                 "type": "integer",
@@ -360,7 +360,7 @@
               },
               "system_prompt": {
                 "type": "string",
-                "description": "System prompt to override the persona's default"
+                "description": "System prompt for the persona"
               },
               "greeting": {
                 "type": "string",
@@ -368,11 +368,11 @@
               },
               "voice_id": {
                 "type": "string",
-                "description": "Voice ID to override the persona's default voice"
+                "description": "Voice ID for the persona"
               },
               "llm_model": {
                 "type": "string",
-                "description": "LLM model to override the persona's default"
+                "description": "LLM model ID for the persona"
               },
               "stt_max_endpoint_delay_ms": {
                 "type": "integer",
@@ -399,7 +399,7 @@
       "MeetBotVoiceSettings": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Optional voice synthesis overrides applied on top of the persona's defaults.",
+        "description": "Optional voice synthesis settings overrides.",
         "properties": {
           "stability": {
             "type": "number",
