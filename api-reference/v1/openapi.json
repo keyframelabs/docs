@@ -190,7 +190,7 @@
     },
     "schemas": {
       "CreateSessionRequest": {
-        "description": "Request to create a session. Choose either ID or Slug.",
+        "description": "Request to create a session.",
         "oneOf": [
           {
             "title": "By Persona ID",
@@ -252,7 +252,7 @@
         }
       },
       "CreateMeetBotRequest": {
-        "description": "Request to create a Meet bot. Choose either Persona ID or Persona Slug.",
+        "description": "Request to create a meet bot.",
         "oneOf": [
           {
             "title": "By Persona ID",
