@@ -540,9 +540,6 @@
                 "items": {
                   "type": "string"
                 }
-              },
-              "voice_settings": {
-                "$ref": "#/components/schemas/MeetBotVoiceSettings"
               }
             }
           },
@@ -603,32 +600,10 @@
                 "items": {
                   "type": "string"
                 }
-              },
-              "voice_settings": {
-                "$ref": "#/components/schemas/MeetBotVoiceSettings"
               }
             }
           }
         ]
-      },
-      "MeetBotVoiceSettings": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Optional voice synthesis settings overrides.",
-        "properties": {
-          "stability": {
-            "type": "number",
-            "description": "Voice stability (provider-specific range)"
-          },
-          "similarity_boost": {
-            "type": "number",
-            "description": "Similarity boost (provider-specific range)"
-          },
-          "speed": {
-            "type": "number",
-            "description": "Speech rate multiplier"
-          }
-        }
       },
       "CreateMeetBotResponse": {
         "type": "object",
