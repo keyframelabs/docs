@@ -187,6 +187,64 @@
         }
       }
     },
+    "/meet-bot/{bot_id}": {
+      "get": {
+        "tags": [
+          "Meet bots"
+        ],
+        "operationId": "getMeetBotStatus",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "bot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Recall AI bot identifier"
+          },
+          {
+            "$ref": "#/components/parameters/RecallApiKeyHeader"
+          }
+        ],
+        "summary": "Get meet bot status",
+        "responses": {
+          "200": {
+            "description": "Meet bot status returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeetBotStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bot not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Failed to fetch bot status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/voices": {
       "get": {
         "tags": [
@@ -587,6 +645,35 @@
           "meeting_url": {
             "type": "string",
             "description": "URL of the meeting the bot joined"
+          }
+        }
+      },
+      "MeetBotStatusResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bot_id",
+          "status"
+        ],
+        "properties": {
+          "bot_id": {
+            "type": "string",
+            "description": "Recall AI bot identifier"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current bot status"
+          },
+          "meeting_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "URL of the meeting associated with the bot"
           }
         }
       },
