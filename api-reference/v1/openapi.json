@@ -99,10 +99,17 @@
     },
     "/meet-bot": {
       "post": {
-        "tags": ["Sessions"],
+        "tags": [
+          "Meet bots"
+        ],
         "operationId": "createMeetBot",
         "security": [
           { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RecallApiKeyHeader"
+          }
         ],
         "summary": "Create meet bot",
         "requestBody": {
@@ -179,6 +186,158 @@
           }
         }
       }
+    },
+    "/voices": {
+      "get": {
+        "tags": [
+          "Voices"
+        ],
+        "operationId": "listVoices",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "List voices",
+        "responses": {
+          "200": {
+            "description": "Voices returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KflVoice"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/voices/{voice_id}": {
+      "get": {
+        "tags": [
+          "Voices"
+        ],
+        "operationId": "getVoice",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get voice",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Voice returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KflVoice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Voice not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llm-models": {
+      "get": {
+        "tags": [
+          "LLM models"
+        ],
+        "operationId": "listLlmModels",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "List LLM models",
+        "responses": {
+          "200": {
+            "description": "LLM models returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KflLlmModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llm-models/{model_id}": {
+      "get": {
+        "tags": [
+          "LLM models"
+        ],
+        "operationId": "getLlmModel",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get LLM model",
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "LLM model ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "LLM model returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KflLlmModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "LLM model not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -186,6 +345,17 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      }
+    },
+    "parameters": {
+      "RecallApiKeyHeader": {
+        "name": "Recall-Api-Key",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Recall AI API key used to spawn and manage the bot"
       }
     },
     "schemas": {
@@ -260,7 +430,6 @@
             "additionalProperties": false,
             "required": [
               "meeting_url",
-              "recall_api_key",
               "persona_id",
               "bot_name",
               "system_prompt",
@@ -275,10 +444,6 @@
                 "examples": [
                   "https://meet.google.com/abc-defg-hij"
                 ]
-              },
-              "recall_api_key": {
-                "type": "string",
-                "description": "Recall AI API key used to spawn and manage the bot"
               },
               "persona_id": {
                 "type": "string",
@@ -307,11 +472,15 @@
               "stt_max_endpoint_delay_ms": {
                 "type": "integer",
                 "description": "Maximum end-of-utterance delay (ms) for the speech-to-text endpointer",
-                "minimum": 0
+                "minimum": 0,
+                "default": 1000
               },
               "stt_language_hints": {
                 "type": "array",
                 "description": "BCP-47 language hints for speech-to-text",
+                "default": [
+                  "en"
+                ],
                 "items": {
                   "type": "string"
                 },
@@ -330,7 +499,6 @@
             "additionalProperties": false,
             "required": [
               "meeting_url",
-              "recall_api_key",
               "persona_slug",
               "bot_name",
               "system_prompt",
@@ -345,10 +513,6 @@
                 "examples": [
                   "https://meet.google.com/abc-defg-hij"
                 ]
-              },
-              "recall_api_key": {
-                "type": "string",
-                "description": "Recall AI API key used to spawn and manage the bot"
               },
               "persona_slug": {
                 "type": "string",
@@ -377,11 +541,15 @@
               "stt_max_endpoint_delay_ms": {
                 "type": "integer",
                 "description": "Maximum end-of-utterance delay (ms) for the speech-to-text endpointer",
-                "minimum": 0
+                "minimum": 0,
+                "default": 1000
               },
               "stt_language_hints": {
                 "type": "array",
                 "description": "BCP-47 language hints for speech-to-text",
+                "default": [
+                  "en"
+                ],
                 "items": {
                   "type": "string"
                 },
@@ -430,6 +598,66 @@
           "meeting_url": {
             "type": "string",
             "description": "URL of the meeting the bot joined"
+          }
+        }
+      },
+      "KflVoice": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "voice_id",
+          "name",
+          "tags",
+          "description",
+          "voice_settings"
+        ],
+        "properties": {
+          "voice_id": {
+            "type": "string",
+            "description": "Voice ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name for the voice"
+          },
+          "tags": {
+            "type": "array",
+            "description": "Search and categorization tags for the voice",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the voice"
+          },
+          "voice_settings": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Default voice synthesis settings for this voice"
+          }
+        }
+      },
+      "KflLlmModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "model_id",
+          "name",
+          "description"
+        ],
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "description": "LLM model ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name for the LLM model"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the LLM model"
           }
         }
       },
