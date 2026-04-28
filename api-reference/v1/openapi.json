@@ -256,6 +256,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "internal": {
+                    "value": {
+                      "detail": "Internal server error"
+                    }
+                  }
                 }
               }
             }
@@ -403,10 +410,7 @@
         "properties": {
           "server_url": {
             "type": "string",
-            "description": "WebRTC connection URL",
-            "examples": [
-              "wss://..."
-            ]
+            "description": "WebRTC connection URL"
           },
           "participant_token": {
             "type": "string",
@@ -414,10 +418,7 @@
           },
           "agent_identity": {
             "type": "string",
-            "description": "Identity of the persona in the WebRTC session",
-            "examples": [
-              "agent"
-            ]
+            "description": "Identity of the persona in the WebRTC session"
           }
         }
       },
@@ -435,15 +436,12 @@
               "system_prompt",
               "greeting",
               "voice_id",
-              "llm_model"
+              "llm_model_id"
             ],
             "properties": {
               "meeting_url": {
                 "type": "string",
-                "description": "URL of the meeting the bot should join",
-                "examples": [
-                  "https://meet.google.com/abc-defg-hij"
-                ]
+                "description": "URL of the meeting the bot should join"
               },
               "persona_id": {
                 "type": "string",
@@ -465,7 +463,7 @@
                 "type": "string",
                 "description": "Voice ID for the persona"
               },
-              "llm_model": {
+              "llm_model_id": {
                 "type": "string",
                 "description": "LLM model ID for the persona"
               },
@@ -483,10 +481,7 @@
                 ],
                 "items": {
                   "type": "string"
-                },
-                "examples": [
-                  ["en", "es"]
-                ]
+                }
               },
               "voice_settings": {
                 "$ref": "#/components/schemas/MeetBotVoiceSettings"
@@ -504,15 +499,12 @@
               "system_prompt",
               "greeting",
               "voice_id",
-              "llm_model"
+              "llm_model_id"
             ],
             "properties": {
               "meeting_url": {
                 "type": "string",
-                "description": "URL of the meeting the bot should join",
-                "examples": [
-                  "https://meet.google.com/abc-defg-hij"
-                ]
+                "description": "URL of the meeting the bot should join"
               },
               "persona_slug": {
                 "type": "string",
@@ -534,7 +526,7 @@
                 "type": "string",
                 "description": "Voice ID for the persona"
               },
-              "llm_model": {
+              "llm_model_id": {
                 "type": "string",
                 "description": "LLM model ID for the persona"
               },
@@ -552,10 +544,7 @@
                 ],
                 "items": {
                   "type": "string"
-                },
-                "examples": [
-                  ["en", "es"]
-                ]
+                }
               },
               "voice_settings": {
                 "$ref": "#/components/schemas/MeetBotVoiceSettings"
