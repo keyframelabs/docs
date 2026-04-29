@@ -95,6 +95,62 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Meet bots"
+        ],
+        "operationId": "stopMeetBot",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "bot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Recall AI bot identifier"
+          },
+          {
+            "$ref": "#/components/parameters/RecallApiKeyHeader"
+          }
+        ],
+        "summary": "Stop meet bot",
+        "responses": {
+          "200": {
+            "description": "Meet bot stop requested",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StopMeetBotResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bot not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Failed to stop bot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/meet-bot": {
@@ -649,6 +705,27 @@
               }
             ],
             "description": "URL of the meeting associated with the bot"
+          }
+        }
+      },
+      "StopMeetBotResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bot_id",
+          "status"
+        ],
+        "properties": {
+          "bot_id": {
+            "type": "string",
+            "description": "Recall AI bot identifier"
+          },
+          "status": {
+            "type": "string",
+            "description": "Stop request status",
+            "enum": [
+              "leaving"
+            ]
           }
         }
       },
