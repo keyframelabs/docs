@@ -1,6 +1,8 @@
 ---
 title: "LiveKit Agents"
-description: "Integrate a Keyframe persona with a LiveKit agent, via the self managed pipeline"
+sidebarTitle: "LiveKit"
+icon: "/images/logos/livekit.png"
+description: "Integrate a Keyframe avatar with a LiveKit agent, via the self managed pipeline"
 ---
 
 ## Prerequisites
@@ -37,7 +39,7 @@ description: "Integrate a Keyframe persona with a LiveKit agent, via the self ma
         )
     
         avatar = keyframe.AvatarSession( # [!code ++:4]
-            # Or use persona_id (see "Persona setup" for details)
+            # Or use persona_id (see "Avatar setup" for details)
             persona_slug="public:cosmo_persona-1.5-live",
         )
     
@@ -50,28 +52,28 @@ description: "Integrate a Keyframe persona with a LiveKit agent, via the self ma
         )
     ```
 
-    Preview the persona in the [Agents Playground ](https://docs.livekit.io/agents/start/playground/)or a frontend [starter app](https://docs.livekit.io/frontends/start/starter-apps/) that you build.
+    Preview the avatar in the [Agents Playground ](https://docs.livekit.io/agents/start/playground/)or a frontend [starter app](https://docs.livekit.io/frontends/start/starter-apps/) that you build.
   </Step>
 </Steps>
 
-## Persona setup
+## Avatar setup
 
-The Keyframe plugin requires selection of a persona for each session. You can specify the persona by ID or by slug, passed by `persona_id` or `persona_slug` respectively. You must provide exactly one of these.
+The Keyframe plugin requires selection of an avatar for each session. You can specify the avatar by ID or by slug, passed by `persona_id` or `persona_slug` respectively. You must provide exactly one of these.
 
-#### Persona slug
+#### Avatar slug
 
-A slug is a human-readable identifier in the format `"public:<persona_name>"`. Browse available public personas at the [Keyframe platform](https://platform.keyframelabs.com).
+A slug is a human-readable identifier in the format `"public:<persona_name>"`. Browse available public avatars at the [Keyframe platform](https://platform.keyframelabs.com).
 
-#### Persona ID
+#### Avatar ID
 
-A persona ID is a UUID that uniquely identifies a persona. You can find persona IDs in the  [Keyframe platform](https://platform.keyframelabs.com).
+An avatar ID is a UUID that uniquely identifies an avatar. You can find avatar IDs in the  [Keyframe platform](https://platform.keyframelabs.com).
 
 ## Programmatic emotion control
 
 <Info>
-  `persona-1.5-live`  **personas** **only**
+  `persona-1.5-live`  **avatars** **only**
 
-  Emotion control is only available for personas powered by `persona-1.5-live`.
+  Emotion control is only available for avatars powered by `persona-1.5-live`.
 </Info>
 
 The Keyframe plugin supports dynamic emotion control. You can change the avatar's facial expression at any time during a conversation using `set_emotion()`:

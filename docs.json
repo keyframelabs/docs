@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Keyframe Labs",
   "colors": {
-    "primary": "#81787A",
-    "light": "#CFCDC7",
-    "dark": "#342E2E"
+    "primary": "#F52F47",
+    "light": "#EFB4ED",
+    "dark": "#E724E9"
   },
   "favicon": "/favicon.svg",
   "integrations": {
@@ -17,23 +17,18 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Main site",
-          "icon": "globe",
+          "anchor": "Homepage & demo",
+          "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -67 723 723'><path fill='currentColor' d='M314.864 23.0762C325.328 32.428 335.106 42.2893 344.247 52.9391C348.067 57.319 352 61.5911 355.938 65.8638C361.657 72.0756 367.299 78.3413 372.831 84.7204C376.062 88.4145 379.345 92.0579 382.634 95.7006C387.759 101.38 392.822 107.108 397.846 112.876C401.119 116.601 404.436 120.285 407.758 123.967C412.884 129.647 417.947 135.374 422.971 141.143C426.244 144.868 429.561 148.552 432.884 152.233C438.014 157.919 443.083 163.65 448.108 169.428C451.303 173.058 454.557 176.629 457.812 180.205C463.872 186.93 469.682 193.811 475.362 200.859C478.145 204.308 480.952 207.725 483.79 211.128C506.67 238.778 523.936 267.314 521.606 304.558C517.06 332.871 501.943 355.21 483.919 376.794C483.256 377.59 482.594 378.386 481.911 379.206C473.379 389.439 464.685 399.497 455.727 409.361C452.787 412.609 449.892 415.889 447.016 419.194C441.689 425.311 436.257 431.329 430.822 437.351C427.818 440.699 424.845 444.069 421.891 447.46C416.562 453.579 411.128 459.6 405.691 465.624C402.72 468.935 399.783 472.271 396.864 475.629C391.13 482.215 385.236 488.652 379.352 495.105C375.3 499.577 371.324 504.107 367.366 508.661C362.917 513.736 358.381 518.731 353.859 523.739C350.953 526.979 348.088 530.245 345.24 533.536C343.312 535.729 341.382 537.921 339.45 540.112C338.098 541.666 336.746 543.221 335.352 544.823C318.959 563.364 300.031 581.705 275.067 587.222C258.972 588.195 244.152 588.597 229.528 580.941C227.494 579.878 227.494 579.878 225.418 578.794C208.904 569.172 194.371 554.984 182.161 540.357C178.195 535.699 174.022 531.243 169.856 526.763C163.844 520.281 157.908 513.753 152.123 507.067C148.914 503.388 145.647 499.765 142.376 496.142C138.182 491.495 134.017 486.83 129.911 482.106C125.498 477.037 120.995 472.056 116.466 467.09C111.043 461.144 105.692 455.148 100.413 449.074C97.1607 445.364 93.8607 441.7 90.5554 438.038C85.4251 432.353 80.3559 426.622 75.3307 420.844C72.1363 417.214 68.8816 413.642 65.6266 410.066C59.4776 403.251 53.6252 396.243 47.8625 389.1C45.4152 386.098 42.9277 383.13 40.4035 380.193C16.412 352.227 -2.46411 322.405 0.262387 284.143C3.21554 260.518 15.4352 239.652 30.0983 221.329C31.1772 219.969 32.2562 218.608 33.3678 217.207C47.1604 200.109 61.5779 183.548 76.49 167.422C80.6079 162.944 84.6194 158.387 88.6047 153.792C91.8352 150.097 95.1186 146.454 98.4069 142.811C102.631 138.131 106.829 133.432 110.969 128.678C116.297 122.561 121.729 116.543 127.163 110.521C130.167 107.173 133.14 103.803 136.094 100.412C141.422 94.2949 146.854 88.2762 152.288 82.2544C155.292 78.9069 158.265 75.5369 161.219 72.1453C167.677 64.7394 174.256 57.4465 180.848 50.1603C182.245 48.5963 183.642 47.0321 185.038 45.4676C222.022 4.25082 268.105 -17.6081 314.864 23.0762ZM244.479 59.9198C232.817 69.9517 222.334 80.9501 212.255 92.5599C209.904 95.1816 207.549 97.7989 205.188 100.412C204.026 101.703 202.864 102.995 201.667 104.325C199.273 106.985 196.876 109.643 194.478 112.3C188.209 119.249 181.99 126.234 175.843 133.291C171.377 138.373 166.832 143.383 162.299 148.406C159.295 151.753 156.322 155.123 153.368 158.515C148.041 164.632 142.608 170.65 137.174 176.672C134.17 180.02 131.197 183.39 128.243 186.781C124.102 191.536 119.904 196.234 115.68 200.915C109.595 207.665 103.577 214.464 97.6218 221.329C96.952 222.09 96.2822 222.85 95.5922 223.633C66.3507 254.915 66.3507 254.915 51.592 293.762C53.4105 316.313 70.3207 334.456 84.5317 350.792C87.6103 354.383 90.548 358.083 93.4997 361.778C100.758 370.707 108.585 379.051 116.453 387.437C120.929 392.212 125.267 397.089 129.543 402.043C132.73 405.706 135.981 409.309 139.235 412.913C143.429 417.559 147.594 422.224 151.699 426.948C156.113 432.017 160.616 436.998 165.145 441.964C170.568 447.911 175.919 453.906 181.198 459.98C184.45 463.69 187.75 467.354 191.055 471.016C195.279 475.696 199.477 480.395 203.618 485.149C208.913 491.227 214.3 497.218 219.714 503.19C221.97 505.709 224.198 508.255 226.387 510.833C240.734 527.764 240.734 527.764 260.345 536.087C268.836 536.01 273.624 531.334 279.778 525.978C281.106 525.007 282.434 524.035 283.802 523.034C288.253 519.153 291.933 514.876 295.763 510.391C298.443 507.338 301.217 504.48 304.118 501.638C308.88 496.95 313.286 492.042 317.65 486.983C320.945 483.189 324.303 479.456 327.673 475.727C331.896 471.046 336.094 466.348 340.235 461.594C345.564 455.475 350.998 449.454 356.435 443.43C359.406 440.119 362.344 436.783 365.262 433.425C370.997 426.839 376.89 420.402 382.775 413.949C386.831 409.472 390.813 404.937 394.773 400.374C397.946 396.76 401.184 393.208 404.422 389.652C410.599 382.816 416.412 375.742 422.198 368.575C425.789 364.265 429.539 360.178 433.374 356.085C458.384 328.912 458.384 328.912 470.277 294.94C468.509 273.015 452.053 254.638 438.38 238.603C436.885 236.833 435.39 235.062 433.896 233.291C424.864 222.634 415.604 212.225 406.121 201.97C402.003 197.492 397.991 192.935 394.006 188.339C390.776 184.645 387.492 181.002 384.204 177.359C379.078 171.68 374.016 165.952 368.991 160.183C365.718 156.458 362.401 152.774 359.079 149.093C353.953 143.413 348.891 137.686 343.866 131.917C339.397 126.831 334.847 121.816 330.31 116.79C327.372 113.515 324.47 110.214 321.588 106.889C316.235 100.744 310.734 94.7367 305.205 88.7502C301.707 84.9584 298.255 81.1466 294.868 77.2551C280.914 61.2273 264.874 43.1674 244.479 59.9198Z'/><path fill='currentColor' d='M517.443 22.7078C528.607 32.7239 539.1 43.5136 548.817 54.9384C551.981 58.6422 555.241 62.2506 558.508 65.8635C566.062 74.2423 573.52 82.6912 580.83 91.2836C588.526 100.321 596.261 109.282 604.342 117.98C609.631 123.673 614.693 129.482 619.554 135.548C626.795 144.547 634.633 152.91 642.526 161.33C647.908 167.073 653.102 172.954 658.223 178.929C659.617 180.535 661.012 182.14 662.407 183.744C667.336 189.432 672.216 195.16 677.067 200.914C677.872 201.869 678.678 202.824 679.508 203.807C704.179 233.265 725.46 264.507 722.606 304.558C719.652 328.19 707.43 349.046 692.77 367.372C692.006 368.336 691.242 369.3 690.454 370.293C681.142 382.019 671.643 393.495 661.511 404.527C658.047 408.398 654.797 412.392 651.549 416.446C645.112 424.414 638.227 431.854 631.21 439.306C626.118 444.744 621.267 450.275 616.61 456.097C609.449 465.042 601.665 473.329 593.834 481.683C586.996 488.98 580.474 496.524 574.009 504.152C564.893 514.885 555.601 525.388 545.961 535.654C541.582 540.321 537.309 545.027 533.187 549.926C522.247 562.514 509.877 573.468 494.911 580.94C493.629 581.588 492.348 582.236 491.028 582.903C474.129 590.244 453.544 589.742 436.472 583.143C423.86 576.792 411.155 567.775 404.029 555.422C401.187 545.949 402.006 538.802 406.679 530.1C411.752 524.012 416.126 520.296 424.216 519.322C437.379 518.88 445.779 523.837 455.653 532.259C460.536 534.701 464.388 534.279 469.786 533.83C483.196 525.849 494.64 514.499 504.645 502.607C508.037 498.619 511.58 494.788 515.128 490.939C520.264 485.317 525.187 479.607 529.948 473.665C536.348 465.725 543.204 458.321 550.189 450.903C555.282 445.465 560.132 439.934 564.79 434.112C571.951 425.167 579.735 416.88 587.565 408.526C593.668 402.014 599.519 395.31 605.315 388.524C606.88 386.692 608.446 384.859 610.012 383.028C611.668 381.09 613.322 379.152 614.976 377.213C619.575 371.836 624.26 366.572 629.074 361.385C656.235 331.753 656.235 331.753 669.706 295.037C667.4 265.976 641.051 240.939 622.474 220.568C618.947 216.597 615.612 212.518 612.292 208.373C605.854 200.405 598.97 192.965 591.953 185.513C586.86 180.075 582.009 174.544 577.352 168.722C570.191 159.777 562.407 151.49 554.576 143.136C547.72 135.82 541.185 128.253 534.696 120.611C525.901 110.273 516.982 100.103 507.719 90.1802C503.502 85.6607 499.393 81.084 495.401 76.3652C487.549 67.3251 478.22 57.1591 466.645 53.3006C458.772 53.8349 454.449 56.3431 448.292 61.1524C439.845 67.6956 433.505 70.3747 422.676 69.0042C415.775 66.82 411.153 63.8682 406.286 58.5024C402.328 50.1117 401.034 41.9667 403.44 32.886C409.981 18.0278 428.708 8.65109 443.09 3.0492C470.825 -5.36493 496.283 4.42636 517.443 22.7078Z'/></svg>",
           "href": "https://www.keyframelabs.com"
         },
         {
-          "anchor": "Demo",
-          "icon": "laptop",
-          "href": "https://demo.keyframelabs.com"
-        },
-        {
           "anchor": "Platform dashboard",
-          "icon": "table-layout",
+          "icon": "display-chart-up",
           "href": "https://platform.keyframelabs.com"
         },
         {
           "anchor": "Discord",
-          "icon": "comment-dots",
+          "icon": "discord",
           "href": "https://discord.gg/Wfce5xHNd5"
         }
       ]
@@ -43,69 +38,44 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Introduction",
             "expanded": true,
             "pages": [
               "index",
-              "guides/getting-started/quickstart-hosted",
-              "guides/getting-started/quickstart-self-managed",
+              "guides/getting-started/choose-integration-path",
               "guides/getting-started/get-your-api-key"
             ]
           },
           {
             "group": "Resources",
             "pages": [
-              "guides/resources/persona-library"
+              "guides/resources/avatar-library"
             ]
           },
           {
             "group": "Integrate",
+            "expanded": true,
             "pages": [
-              "guides/integrate/overview",
-              "guides/integrate/hosted",
-              "guides/integrate/self-managed",
+              "guides/integrate/livekit",
+              {
+                "group": "Eleven Agents",
+                "icon": "/images/logos/elevenlabs.png",
+                "expanded": true,
+                "pages": [
+                  "guides/integrate/eleven-agents/hosted",
+                  "guides/integrate/eleven-agents/websocket"
+                ]
+              },
+              {
+                "group": "OpenAI Realtime",
+                "icon": "/images/logos/openai.png",
+                "expanded": true,
+                "pages": [
+                  "guides/integrate/openai-realtime/hosted",
+                  "guides/integrate/openai-realtime/websocket"
+                ]
+              },
               "guides/integrate/meetings-zoom-meet-teams"
-            ]
-          },
-          {
-            "group": "Hosted",
-            "expanded": true,
-            "pages": [
-              {
-                "group": "Agent frameworks",
-                "expanded": true,
-                "pages": [
-                  "guides/hosted/agent-frameworks/elevenlabs-agents"
-                ]
-              },
-              {
-                "group": "Real-time LLMs",
-                "expanded": true,
-                "pages": [
-                  "guides/hosted/agent-frameworks/openai-realtime"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Self managed",
-            "expanded": true,
-            "pages": [
-              {
-                "group": "Agent frameworks",
-                "expanded": true,
-                "pages": [
-                  "guides/self-managed/agent-frameworks/elevenlabs-agents",
-                  "guides/self-managed/agent-frameworks/livekit-agents"
-                ]
-              },
-              {
-                "group": "Real-time LLMs",
-                "expanded": true,
-                "pages": [
-                  "guides/self-managed/real-time-llms/openai-realtime"
-                ]
-              }
             ]
           }
         ]
@@ -142,15 +112,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
@@ -162,12 +132,69 @@
   },
   "background": {
     "color": {
-      "light": "#FFFFFF",
-      "dark": "#000000"
+      "light": "#F5F5F5",
+      "dark": "#0B0B0B"
     }
   },
-  "description": "Add real-time, expressive personas to your AI agents and applications. Explore resources, tutorials, API docs, and dynamic examples to get the most out of Keyframe Lab's developer platform.",
+  "description": "Add real-time, expressive avatars to your AI agents and applications. Explore resources, tutorials, API docs, and dynamic examples to get the most out of Keyframe Lab's developer platform.",
+  "markdown": {
+    "instructions": [
+      "Keyframe Labs is the real-time rendering layer for AI: it takes streaming audio from any agent framework or speech-to-speech LLM and returns a photorealistic, lip-synced avatar as live video. It does not replace your agent, LLM, or voice stack; it sits on top of them.",
+      "Terminology: the docs and UI say 'avatar', but API fields, SDK classes, and model names use 'persona' (persona_id, persona_slug, PersonaEmbed, PersonaView, persona-1.5-live). These identifiers are correct as-is; never rename them to 'avatar' in code.",
+      "The current model is persona-1.5-live. Do not reference persona-1-live; it is retired.",
+      "There are three integration paths: Widget (no-code, agent designed on the Keyframe platform), Hosted (bring your own agent or LLM, low-code PersonaEmbed), and Self managed (bring your own agent or LLM, keys stay on your infrastructure, custom embed via PersonaView). Read /guides/getting-started/choose-integration-path.md before recommending one.",
+      "Documented integrations: LiveKit (plugin), ElevenLabs Agents and OpenAI Realtime (each available hosted or via WebSocket), and meetings (Zoom, Google Meet, Microsoft Teams). This list is not exhaustive.",
+      "Custom agents and other frameworks are fully supported via the self-managed WebSocket approach: any stack that can stream audio can drive a Keyframe avatar. Follow the same recipe as the ElevenLabs Agents WebSocket and OpenAI Realtime WebSocket guides, swapping in your own audio source, and use the Keyframe SDK (@keyframelabs/sdk) and Keyframe Elements (@keyframelabs/elements, e.g. PersonaView) documentation as the reference for low-level control. Do not use the React bindings (@keyframelabs/react) for this; they are higher-level and not designed for low-level control. A dedicated 'Custom or other agents' guide is coming.",
+      "API keys are created at https://platform.keyframelabs.com/api-keys, are shown only once, and must stay server-side. Only publishable keys for low-code components belong in client code."
+    ]
+  },
   "seo": {
     "indexing": "navigable"
-  }
+  },
+  "redirects": [
+    {
+      "source": "/guides/getting-started/quickstart-hosted",
+      "destination": "/guides/getting-started/choose-integration-path"
+    },
+    {
+      "source": "/guides/getting-started/quickstart-self-managed",
+      "destination": "/guides/getting-started/choose-integration-path"
+    },
+    {
+      "source": "/guides/integrate/overview",
+      "destination": "/guides/getting-started/choose-integration-path"
+    },
+    {
+      "source": "/guides/integrate/hosted",
+      "destination": "/guides/getting-started/choose-integration-path"
+    },
+    {
+      "source": "/guides/integrate/self-managed",
+      "destination": "/guides/getting-started/choose-integration-path"
+    },
+    {
+      "source": "/guides/hosted/agent-frameworks/elevenlabs-agents",
+      "destination": "/guides/integrate/eleven-agents/hosted"
+    },
+    {
+      "source": "/guides/hosted/agent-frameworks/openai-realtime",
+      "destination": "/guides/integrate/openai-realtime/hosted"
+    },
+    {
+      "source": "/guides/self-managed/agent-frameworks/elevenlabs-agents",
+      "destination": "/guides/integrate/eleven-agents/websocket"
+    },
+    {
+      "source": "/guides/self-managed/agent-frameworks/livekit-agents",
+      "destination": "/guides/integrate/livekit"
+    },
+    {
+      "source": "/guides/self-managed/real-time-llms/openai-realtime",
+      "destination": "/guides/integrate/openai-realtime/websocket"
+    },
+    {
+      "source": "/guides/resources/persona-library",
+      "destination": "/guides/resources/avatar-library"
+    }
+  ]
 }

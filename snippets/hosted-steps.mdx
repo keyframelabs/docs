@@ -8,7 +8,7 @@ title: "Hosted Steps"
 
     ![Image](/images/image.png)
 
-    Select a persona and the appropriate provider,  adding the provider credentials highlighted in the prerequisites.
+    Select an avatar and the appropriate provider,  adding the provider credentials highlighted in the prerequisites.
 
     <img
       src="/images/image-1.png"
@@ -34,7 +34,7 @@ title: "Hosted Steps"
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My Keyframe Persona Demo</title>
+        <title>My Keyframe Avatar Demo</title>
       </head>
       <body>
         <div
@@ -49,10 +49,10 @@ title: "Hosted Steps"
             padding: 25px;
           "
         >
-          <h1>Chat with your Keyframe Persona</h1>
+          <h1>Chat with your Keyframe Avatar</h1>
     
           <div
-            id="persona-video"
+            id="avatar-video"
             style="
               width: 95%;
               max-width: 384px;
@@ -74,7 +74,7 @@ title: "Hosted Steps"
         const publishableKey = 'kfl_pk_live_...';
     	
         const embed = new PersonaEmbed({
-      	  container: document.getElementById('persona-video'),
+      	  container: document.getElementById('avatar-video'),
       	  publishableKey: publishableKey,
       	  videoFit: 'contain',
       	  onStateChange: (status) => console.log('Status:', status),
@@ -134,14 +134,14 @@ title: "Hosted Steps"
   <Step title="Open and test" stepNumber={5}>
     1. Navigate to `http://localhost:8000` in your browser
     2. Allow microphone access when prompted
-    3. Your persona will appear automatically and you can start talking
+    3. Your avatar will appear automatically and you can start talking
     4. When you’re done, close the browser tab to end the session
   </Step>
 </Steps>
 
 ## Summary
 
-Congratulations on your first video call with a Keyframe persona. A couple things worth highlighting:
+Congratulations on your first video call with a Keyframe avatar. A couple things worth highlighting:
 
 - Your Keyframe publishable key authenticates your client application with both your agent or LLM and Keyframe
-- The Keyframe Elements SDK establishes all necessary real-time audio/video connections to display and interact with your persona
+- The Keyframe Elements SDK establishes all necessary real-time audio/video connections to display and interact with your avatar

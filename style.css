@@ -1,0 +1,31 @@
+/*
+ * Keyframe Labs overrides.
+ *
+ * Borders: Mintlify paints accordion groups with --gray-100, which is
+ * invisible against our background, while standalone accordions and cards
+ * use different strengths. Unify all three on Mintlify's theme-toned gray
+ * ramp at the same subtle-but-visible level (~stock border-standard).
+ */
+:root {
+  --kfl-border: color-mix(in oklab, rgb(var(--gray-200)) 75%, transparent);
+}
+
+.dark {
+  --kfl-border: rgb(var(--gray-800));
+}
+
+details.accordion,
+.accordion-group,
+.card {
+  border-color: var(--kfl-border) !important;
+}
+
+/*
+ * Dashboard CTA: brand gradient from the marketing site
+ * (orange -> crimson -> magenta). The button background is painted by an
+ * absolutely positioned span; stock hover dims it via opacity, which still
+ * works on the gradient.
+ */
+#topbar-cta-button a > span.absolute {
+  background: linear-gradient(to top right, #F99231, #F52F47 45%, #E724E9);
+}

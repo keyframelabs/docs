@@ -1,0 +1,118 @@
+---
+title: "Choose integration path"
+description: "Choose the right integration approach for your use case"
+---
+
+## Which integration approach should I choose?
+
+There are 3 ways to integrate Keyframe's interactive video models:
+
+1. **Widget:** Design your agent or LLM directly on the Keyframe platform with a supported provider, then drop a snippet into your application to go live in minutes with a configurable, no-code widget. Best if you don't want to write any code, or are starting from scratch (i.e., no existing agent or LLM).
+2. **Hosted:** Bring your own agent or LLM. Share your agent or LLM credentials with Keyframe's platform to get a configurable, low-code embed with an optimized speech-to-video experience. Best if you have an existing agent or LLM in production and want to add a Keyframe avatar without building UX and common plumbing from scratch.
+3. **Self managed:** Bring your own agent or LLM and keep your API keys on your own infrastructure. Build a fully custom embed using the same JS primitives that power our Widget and Hosted approaches. Best if you want maximum control.
+
+| **Feature** | Widget | Hosted | Self managed |
+| --- | --- | --- | --- |
+| Design agent or LLM on Keyframe platform | ✅ | ❌ | ❌ |
+| Bring your own agent or LLM | ❌ | ✅ | ✅ |
+| Share agent or LLM credentials with Keyframe | ❌ | ✅ | ❌ |
+| Keyframe managed agent or LLM | ✅ | ❌ | ❌ |
+| Configurable no-code widget | ✅ | ❌ | ❌ |
+| Configurable low-code embed | ❌ | ✅ | ❌ |
+| Custom embed via Keyframe's JS primitives | ❌ | ✅ | ✅ |
+| Per session avatar selection | ❌ | ❌ | ✅ |
+
+## How the pipelines work
+
+<AccordionGroup>
+  <Accordion title="Hosted pipeline" icon="server">
+    A hosted pipeline allows you to bring your own agent or LLM while still getting a batteries-included, configurable embed with an optimized speech-to-video experience, via the low-code `PersonaEmbed`. Hosted pipelines require you to share your agent or LLM credentials with Keyframe's platform.
+
+    <Steps>
+      <Step title="Bring your own agent or LLM">
+        Your client application continues to interface with your existing agent or real-time LLM (though Keyframe will now manage the connection on your behalf)
+      </Step>
+      <Step title="Share your agent or LLM credentials with Keyframe">
+        To use low-code components like `PersonaEmbed`, the Keyframe platform needs the agent or LLM credentials you currently use to manage client connections
+      </Step>
+      <Step title="Keyframe low-code components">
+        You'll receive a publishable key to configure low-code components like `PersonaEmbed`, which you can drop in to our application. Keyframe then manages client connections to both your agent or LLM and the Keyframe platform — receiving "raw" audio from your agent or LLM, and relaying it to the Keyframe platform
+      </Step>
+      <Step title="Rendered avatar">
+        The Keyframe low-code components also manage rendering the generated avatar returned from the Keyframe platform in your client application
+      </Step>
+    </Steps>
+
+    ```text
+    +---------------------+                                     +--------------------------+
+    |                     | ----------- User input -----------> |                          |
+    |                     |                                     |    Your existing agent   |
+    |                     | <----- Raw agent / LLM audio ------ |         or LLM           |
+    |                     |       (will now be "relayed")       |                          |
+    |                     |                                     +--------------------------+
+    |                     |                                                   |
+    |                     |                                         Keyframe uses shared 
+    |   Your client app   |                                      credentials to manage client 
+    |  w/ low-code comp.  |                                      connections to agent or LLM,
+    |                     |                                      enabling low-code components
+    |                     |                                                   |
+    |                     |                                     +--------------------------+
+    |                     | ---- Relayed agent / LLM audio ---> |                          |
+    |                     | <-------- Rendered avatar --------- |         Keyframe         |
+    |                     |    (w/ synced audio and video)      |         platform         |
+    +---------------------+                                     +--------------------------+
+    ```
+  </Accordion>
+  <Accordion title="Self managed pipeline" icon="code">
+    A self managed pipeline allows you to bring your own agent or LLM and keep your API keys on your own infrastructure. Build a fully custom embed via `PersonaView`, leveraging the same JS primitives that power our Widget (no-code) and Hosted (low-code) approaches.
+
+    <Steps>
+      <Step title="Bring your own agent or LLM">
+        Your client application continues to interface with your existing agent framework or real-time LLM
+      </Step>
+      <Step title="Keyframe components">
+        Our [easy-to-use components](/sdk-reference/javascript) receive "raw" audio from your agent or LLM, and relays it to the Keyframe platform
+      </Step>
+      <Step title="Rendered avatar">
+        The Keyframe components also manage rendering the generated avatar returned from the Keyframe platform in your client application
+      </Step>
+    </Steps>
+
+    ```text
+    +---------------------+                                     +--------------------------+
+    |                     | ----------- User input -----------> |                          |
+    |                     |                                     |    Your existing agent   |
+    |                     | <----- Raw agent / LLM audio ------ |         or LLM           |
+    |                     |       (will now be "relayed")       |                          |
+    |                     |                                     +--------------------------+
+    |   Your client app   |
+    |                     |                                     +--------------------------+
+    |                     | ---- Relayed agent / LLM audio ---> |                          |
+    |                     | <-------- Rendered avatar --------- |         Keyframe         |
+    |                     |    (w/ synced audio and video)      |         platform         |
+    +---------------------+                                     +--------------------------+
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Start integrating
+
+Keyframe avatars integrate with both agent frameworks (e.g., ElevenLabs, LiveKit) and real-time LLMs (e.g., OpenAI Realtime). While each integration has minor setup differences, the overall flow is largely the same.
+
+<Columns cols={3}>
+  <Column>
+    <Card title="LiveKit" icon="/images/logos/livekit.png" href="/guides/integrate/livekit">
+      Add avatars to your LiveKit agents with our plugin
+    </Card>
+  </Column>
+  <Column>
+    <Card title="Eleven Agents" icon="/images/logos/elevenlabs.png" href="/guides/integrate/eleven-agents/hosted">
+      Add avatars to your ElevenLabs agents, hosted or via WebSocket
+    </Card>
+  </Column>
+  <Column>
+    <Card title="OpenAI Realtime" icon="/images/logos/openai.png" href="/guides/integrate/openai-realtime/hosted">
+      Add avatars to your OpenAI Realtime apps, hosted or via WebSocket
+    </Card>
+  </Column>
+</Columns>

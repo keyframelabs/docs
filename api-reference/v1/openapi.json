@@ -493,7 +493,7 @@
             "properties": {
               "persona_id": {
                 "type": "string",
-                "description": "ID of persona to use"
+                "description": "ID of avatar to use"
               }
             }
           },
@@ -507,7 +507,7 @@
             "properties": {
               "persona_slug": {
                 "type": "string",
-                "description": "Slug of persona to use"
+                "description": "Slug of avatar to use"
               }
             }
           }
@@ -528,11 +528,11 @@
           },
           "participant_token": {
             "type": "string",
-            "description": "JWT for 'source' participant to pass audio to persona"
+            "description": "JWT for 'source' participant to pass audio to avatar"
           },
           "agent_identity": {
             "type": "string",
-            "description": "Identity of the persona in the WebRTC session"
+            "description": "Identity of the avatar in the WebRTC session"
           }
         }
       },
@@ -559,7 +559,7 @@
               },
               "persona_id": {
                 "type": "string",
-                "description": "ID of persona to use"
+                "description": "ID of avatar to use"
               },
               "bot_name": {
                 "type": "string",
@@ -567,7 +567,7 @@
               },
               "system_prompt": {
                 "type": "string",
-                "description": "System prompt for the persona"
+                "description": "System prompt for the avatar"
               },
               "greeting": {
                 "type": "string",
@@ -575,11 +575,11 @@
               },
               "voice_id": {
                 "type": "string",
-                "description": "Voice ID for the persona"
+                "description": "Voice ID for the avatar"
               },
               "llm_model_id": {
                 "type": "string",
-                "description": "LLM model ID for the persona"
+                "description": "LLM model ID for the avatar"
               },
               "stt_max_endpoint_delay_ms": {
                 "type": "integer",
@@ -619,7 +619,7 @@
               },
               "persona_slug": {
                 "type": "string",
-                "description": "Slug of persona to use"
+                "description": "Slug of avatar to use"
               },
               "bot_name": {
                 "type": "string",
@@ -627,7 +627,7 @@
               },
               "system_prompt": {
                 "type": "string",
-                "description": "System prompt for the persona"
+                "description": "System prompt for the avatar"
               },
               "greeting": {
                 "type": "string",
@@ -635,11 +635,11 @@
               },
               "voice_id": {
                 "type": "string",
-                "description": "Voice ID for the persona"
+                "description": "Voice ID for the avatar"
               },
               "llm_model_id": {
                 "type": "string",
-                "description": "LLM model ID for the persona"
+                "description": "LLM model ID for the avatar"
               },
               "stt_max_endpoint_delay_ms": {
                 "type": "integer",

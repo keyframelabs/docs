@@ -6,7 +6,7 @@
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My Keyframe Persona Demo</title>
+        <title>My Keyframe Avatar Demo</title>
       </head>
       <body>
         <div
@@ -21,10 +21,10 @@
             padding: 25px;
           "
         >
-          <h1>Chat with your Keyframe Persona</h1>
+          <h1>Chat with your Keyframe Avatar</h1>
     
           <div
-            id="persona-video"
+            id="avatar-video"
             style="
               width: 95%;
               max-width: 384px;
@@ -50,7 +50,7 @@
         const voiceAgentDetails = {};
     
         const view = new PersonaView({
-          container: document.getElementById('persona-video'),
+          container: document.getElementById('avatar-video'),
           sessionDetails,
           voiceAgentDetails,
           videoFit: 'contain',
@@ -102,7 +102,7 @@
           -H "Authorization: Bearer kfl_sk_live_..." \
           -H "Content-Type: application/json" \
           -d '{
-            "persona_slug": "public:kai"
+            "persona_slug": "public:cosmo_persona-1.5-live"
           }'
         ```
       </Tab>
@@ -135,15 +135,15 @@
   <Step title="Open and test" stepNumber={6}>
     1. Navigate to `http://localhost:8000` in your browser
     2. Allow microphone access when prompted
-    3. Your persona will appear automatically and you can start talking
+    3. Your avatar will appear automatically and you can start talking
     4. When you’re done, close the browser tab to end the session
   </Step>
 </Steps>
 
 ## Summary
 
-Congratulations on your first video call with a Keyframe persona. A couple things worth highlighting:
+Congratulations on your first video call with a Keyframe avatar. A couple things worth highlighting:
 
 - You exchanged your Keyframe API key for ephemeral Keyframe session credentials
 - The steps above "hardcoded" provider credentials—in production you'd want to generate these ephemerally
-- The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your persona
+- The Keyframe Elements SDK uses these ephemeral credentials to establish all necessary real-time audio/video connections to display and interact with your avatar
