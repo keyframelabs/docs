@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Sessions API",
-    "version": "1.2.0"
+    "version": "1.3.0"
   },
   "servers": [
     {
@@ -22,12 +22,40 @@
           }
         ],
         "summary": "Create session",
+        "description": "Reserve an avatar and return the WebRTC details your client needs to join it.\n\nAddress the avatar directly with `persona_id` or `persona_slug`, or pass an `agent_id` to start from a stored agent. Agent sessions take the avatar and voice agent configuration from the agent, and the response additionally carries `voice_agent_details`: short-lived, browser-safe credentials for the agent's voice provider, so the vendor key never leaves Keyframe.\n\nAgent sessions also accept `overrides` (per-session changes the agent has allowed) and `dynamic_variables` (values for `{{placeholders}}` in the system prompt and greeting). Both are validated before any capacity is reserved.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateSessionRequest"
+              },
+              "examples": {
+                "byPersonaId": {
+                  "summary": "By avatar",
+                  "value": {
+                    "persona_id": "0b8d1c2e-4f5a-4b6c-9d7e-8f9a0b1c2d3e"
+                  }
+                },
+                "byAgentId": {
+                  "summary": "By agent",
+                  "value": {
+                    "agent_id": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c"
+                  }
+                },
+                "byAgentIdWithOverrides": {
+                  "summary": "By agent, with overrides and dynamic variables",
+                  "value": {
+                    "agent_id": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c",
+                    "overrides": {
+                      "greeting": "Welcome back, {{customer_name}}."
+                    },
+                    "dynamic_variables": {
+                      "customer_name": "Ada",
+                      "plan": "pro"
+                    }
+                  }
+                }
               }
             }
           }
@@ -39,12 +67,62 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateSessionResponse"
+                },
+                "examples": {
+                  "byPersona": {
+                    "summary": "Avatar session",
+                    "value": {
+                      "server_url": "wss://rtc.keyframelabs.com",
+                      "participant_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                      "agent_identity": "avatar-7c1f",
+                      "voice_agent_details": null
+                    }
+                  },
+                  "byAgent": {
+                    "summary": "Agent session (Keyframe Voice Agent)",
+                    "value": {
+                      "server_url": "wss://rtc.keyframelabs.com",
+                      "participant_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                      "agent_identity": "avatar-7c1f",
+                      "voice_agent_details": {
+                        "type": "kfl",
+                        "signed_url": "wss://voice.keyframelabs.com/ws?token=..."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Agent is not active, or the overrides / dynamic variables are invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotActive": {
+                    "value": {
+                      "detail": "Agent is not active"
+                    }
+                  },
+                  "missingDynamicVariables": {
+                    "value": {
+                      "detail": "Missing dynamic variables: customer_name"
+                    }
+                  },
+                  "unknownVoice": {
+                    "value": {
+                      "detail": "Unknown or inactive voice_id in overrides"
+                    }
+                  }
                 }
               }
             }
           },
           "403": {
-            "description": "Model not allowed for plan",
+            "description": "Model not allowed for plan, or an override the agent does not permit",
             "content": {
               "application/json": {
                 "schema": {
@@ -54,6 +132,33 @@
                   "modelNotAllowed": {
                     "value": {
                       "detail": "Plan 'free' does not support model persona-1.5-live"
+                    }
+                  },
+                  "overrideNotAllowed": {
+                    "value": {
+                      "detail": "This agent does not allow overriding: voice_id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agent or avatar not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotFound": {
+                    "value": {
+                      "detail": "Agent not found"
+                    }
+                  },
+                  "personaNotFound": {
+                    "value": {
+                      "detail": "Persona not found or not visible"
                     }
                   }
                 }
@@ -88,6 +193,241 @@
                   "internal": {
                     "value": {
                       "detail": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "listAgents",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "List agents",
+        "description": "Agents in your organization, newest first. Drafts are omitted; fetch one by ID to read a draft.\n\nAgents are designed and published on the Keyframe platform. This API reads them and starts sessions from them; it does not create or edit them.",
+        "responses": {
+          "200": {
+            "description": "Agents returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Agent"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "invalidApiKey": {
+                    "value": {
+                      "detail": "Invalid API Key"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_id}": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "getAgent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get agent",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AgentIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agent"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "invalidApiKey": {
+                    "value": {
+                      "detail": "Invalid API Key"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agent not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotFound": {
+                    "value": {
+                      "detail": "Agent not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_id}/token": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "createAgentConversationToken",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Create conversation token",
+        "description": "Mint a short-lived token that lets a browser start one session with this agent without ever seeing your API key.\n\nThis is how `private` agents are used from a client: call this endpoint from your backend, relay the `token` to the page, and pass it to the client SDK as `conversationToken` in place of an `agent_id`. The agent's origin allowlist is not applied to token sessions, since your backend has already authorized the caller. Public agents accept tokens too.\n\nUse `dynamic_variables` to bind per-user values (a name, an account tier) into the token. They take precedence over anything the client sends when it exchanges the token.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AgentIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentTokenRequest"
+              },
+              "examples": {
+                "default": {
+                  "summary": "Default TTL",
+                  "value": {}
+                },
+                "withDynamicVariables": {
+                  "summary": "Bind per-user values",
+                  "value": {
+                    "ttl_seconds": 600,
+                    "dynamic_variables": {
+                      "customer_name": "Ada",
+                      "plan": "pro"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token minted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAgentTokenResponse"
+                },
+                "examples": {
+                  "token": {
+                    "value": {
+                      "token": "eyJhZ2VudCI6Ii4uLiIsImV4cCI6MTc5MjY4MDAwMH0.k3xZ2...",
+                      "expires_at": 1792680000,
+                      "agent_id": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Agent is not active, or the dynamic variables are invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotActive": {
+                    "value": {
+                      "detail": "Agent is not active"
+                    }
+                  },
+                  "reservedName": {
+                    "value": {
+                      "detail": "Dynamic variable names starting with 'system__' are reserved"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "invalidApiKey": {
+                    "value": {
+                      "detail": "Invalid API Key"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agent not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotFound": {
+                    "value": {
+                      "detail": "Agent not found"
                     }
                   }
                 }
@@ -562,6 +902,12 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "tag": "Enterprise"
+          },
+          "content": "<Info>\n  Batch generation is available on Enterprise plans. If your plan does not include it, [get in touch](https://keyframe-labs.cal.com/support/get-help) to enable it for your organization.\n</Info>"
         }
       }
     },
@@ -736,6 +1082,12 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "tag": "Enterprise"
+          },
+          "content": "<Info>\n  Batch generation is available on Enterprise plans. If your plan does not include it, [get in touch](https://keyframe-labs.cal.com/support/get-help) to enable it for your organization.\n</Info>"
         }
       },
       "get": {
@@ -839,6 +1191,12 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "tag": "Enterprise"
+          },
+          "content": "<Info>\n  Batch generation is available on Enterprise plans. If your plan does not include it, [get in touch](https://keyframe-labs.cal.com/support/get-help) to enable it for your organization.\n</Info>"
         }
       }
     },
@@ -919,6 +1277,12 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "tag": "Enterprise"
+          },
+          "content": "<Info>\n  Batch generation is available on Enterprise plans. If your plan does not include it, [get in touch](https://keyframe-labs.cal.com/support/get-help) to enable it for your organization.\n</Info>"
         }
       }
     }
@@ -939,6 +1303,16 @@
           "type": "string"
         },
         "description": "Recall AI API key used to spawn and manage the bot"
+      },
+      "AgentIdPath": {
+        "name": "agent_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The agent's public `agent_...` handle. The internal UUID is accepted too.",
+        "example": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c"
       }
     },
     "schemas": {
@@ -972,6 +1346,27 @@
                 "description": "Slug of avatar to use"
               }
             }
+          },
+          {
+            "title": "By Agent ID",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent_id"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent to start the session from (see GET /agents). The agent supplies the avatar and voice agent configuration, and the response includes `voice_agent_details`. The agent must be `active`.",
+                "example": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c"
+              },
+              "overrides": {
+                "$ref": "#/components/schemas/AgentSessionOverrides"
+              },
+              "dynamic_variables": {
+                "$ref": "#/components/schemas/DynamicVariables"
+              }
+            }
           }
         ]
       },
@@ -995,6 +1390,536 @@
           "agent_identity": {
             "type": "string",
             "description": "Identity of the avatar in the WebRTC session"
+          },
+          "voice_agent_details": {
+            "description": "Browser-side credentials for the agent's voice provider. Set only for sessions created with `agent_id`; `null` otherwise.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentDetails"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "Agent": {
+        "type": "object",
+        "description": "An avatar paired with a voice agent configuration, designed and published on the Keyframe platform. Sessions started from an agent inherit its configuration.",
+        "required": [
+          "id",
+          "agent_id",
+          "org_id",
+          "label",
+          "status",
+          "auth",
+          "allowed_overrides",
+          "dynamic_variable_defaults",
+          "persona_id",
+          "voice_agent",
+          "allowed_origins",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Internal identifier. Use `agent_id` in API calls and client code."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Public handle: `agent_` followed by 32 hex characters. Immutable, and safe to ship in client code for `public` agents.",
+            "example": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display name set on the platform.",
+            "example": "Support agent"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "disabled",
+              "draft"
+            ],
+            "description": "Only `active` agents can start sessions. `GET /agents` omits drafts."
+          },
+          "auth": {
+            "type": "string",
+            "enum": [
+              "public",
+              "private"
+            ],
+            "description": "`public`: a page on an allowed origin can start a session with the bare `agent_id`. `private`: client sessions require a conversation token minted server-side with POST /agents/{agent_id}/token."
+          },
+          "allowed_overrides": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOverrideField"
+            },
+            "description": "Fields a caller may change per session via `overrides`. Anything else is rejected with 403."
+          },
+          "dynamic_variable_defaults": {
+            "$ref": "#/components/schemas/DynamicVariables",
+            "description": "Fallback values for `{{placeholders}}` in the system prompt and greeting. Values supplied at session or token creation take precedence."
+          },
+          "persona_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Avatar the agent renders."
+          },
+          "voice_agent": {
+            "$ref": "#/components/schemas/VoiceAgent"
+          },
+          "allowed_origins": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Browser origins that may start sessions with the bare `agent_id`. Not applied to sessions started with a conversation token or an API key.",
+            "example": [
+              "https://app.example.com"
+            ]
+          },
+          "publishable_key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "deprecated": true,
+            "description": "Legacy `kfl_pk_live_...` handle, present only on agents created before agent IDs. Use `agent_id` instead."
+          },
+          "source_config_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid",
+            "description": "For an edit draft, the published agent it was forked from."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AgentOverrideField": {
+        "type": "string",
+        "enum": [
+          "system_prompt",
+          "greeting",
+          "voice_id",
+          "llm_model"
+        ]
+      },
+      "AgentSessionOverrides": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Per-session changes to a Keyframe Voice Agent's configuration. Every field you send must appear in the agent's `allowed_overrides`, or the request fails with 403 before any capacity is reserved. Only agents whose `voice_agent.type` is `kfl` accept overrides.",
+        "properties": {
+          "system_prompt": {
+            "type": "string",
+            "description": "May contain `{{placeholders}}`; they are filled from `dynamic_variables`."
+          },
+          "greeting": {
+            "type": "string",
+            "description": "First message the agent speaks. An empty string disables it so the agent waits for the user."
+          },
+          "voice_id": {
+            "type": "string",
+            "description": "An active voice from GET /voices. The TTS provider, model and voice settings follow the new voice."
+          },
+          "llm_model": {
+            "type": "string",
+            "description": "A model from GET /llm-models."
+          }
+        }
+      },
+      "DynamicVariables": {
+        "type": "object",
+        "description": "Values for `{{placeholders}}` in the agent's system prompt and greeting. Names use letters, digits and underscores (up to 100 characters); names starting with `system__` are reserved. Values are strings up to 2000 characters; numbers and booleans are converted to strings. At most 40 entries. A placeholder left without a value fails the request with 400.",
+        "maxProperties": 40,
+        "propertyNames": {
+          "pattern": "^[A-Za-z0-9_]+$",
+          "maxLength": 100
+        },
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "type": "string",
+              "maxLength": 2000
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "example": {
+          "customer_name": "Ada",
+          "plan": "pro"
+        }
+      },
+      "VoiceAgent": {
+        "description": "Voice agent configuration, discriminated by `type`.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/KflVoiceAgent"
+          },
+          {
+            "$ref": "#/components/schemas/ElevenLabsVoiceAgent"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAIVoiceAgent"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "kfl": "#/components/schemas/KflVoiceAgent",
+            "elevenlabs": "#/components/schemas/ElevenLabsVoiceAgent",
+            "openai": "#/components/schemas/OpenAIVoiceAgent"
+          }
+        }
+      },
+      "KflVoiceAgent": {
+        "title": "Keyframe Voice Agent",
+        "type": "object",
+        "description": "Keyframe's first-party voice agent: speech-to-text, an LLM, and text-to-speech run by Keyframe. The only type that supports `overrides` and dynamic variables.",
+        "required": [
+          "type",
+          "provider",
+          "voice_id",
+          "llm_model"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "kfl"
+            ]
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "elevenlabs",
+              "elevenlabs-dialogue",
+              "elevenlabs-v3",
+              "cartesia",
+              "fishaudio"
+            ],
+            "description": "Text-to-speech provider."
+          },
+          "voice_id": {
+            "type": "string",
+            "description": "Voice from GET /voices."
+          },
+          "tts_model": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Text-to-speech model; the provider's default when null."
+          },
+          "llm_model": {
+            "type": "string",
+            "description": "Model from GET /llm-models."
+          },
+          "llm_provider": {
+            "type": "string",
+            "enum": [
+              "openrouter",
+              "kfl_llm"
+            ],
+            "default": "openrouter"
+          },
+          "stt_provider": {
+            "type": "string",
+            "enum": [
+              "soniox",
+              "elevenlabs",
+              "cartesia"
+            ],
+            "default": "soniox",
+            "description": "Speech-to-text provider."
+          },
+          "stt_model": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Speech-to-text model; the provider's default when null."
+          },
+          "system_prompt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "May contain `{{placeholders}}` filled from dynamic variables."
+          },
+          "greeting": {
+            "type": "string",
+            "default": "Hello! How can I help you today?",
+            "description": "First message the agent speaks. An empty string means no first message; the agent waits for the user. May contain `{{placeholders}}`."
+          },
+          "first_message_interruptible": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether the user can talk over the greeting. When false the greeting always plays to the end."
+          },
+          "ws_auth_ttl_seconds": {
+            "type": "integer",
+            "minimum": 30,
+            "maximum": 3600,
+            "default": 300,
+            "description": "How long the `signed_url` in `voice_agent_details` stays valid before the client must connect."
+          },
+          "stt_max_endpoint_delay_ms": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 100,
+            "maximum": 5000,
+            "description": "Maximum end-of-utterance delay (ms) for the speech-to-text endpointer"
+          },
+          "stt_language_hints": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "description": "BCP-47 language hints for speech-to-text"
+          },
+          "voice_settings": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true,
+            "description": "Provider-specific synthesis settings; see `voice_settings` on GET /voices for the voice's defaults."
+          },
+          "tool_calling_enabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "set_emotion"
+              ]
+            },
+            "default": [
+              "set_emotion"
+            ],
+            "description": "Tools the LLM may call. `set_emotion` lets it change the avatar's expression mid-conversation."
+          }
+        }
+      },
+      "ElevenLabsVoiceAgent": {
+        "title": "ElevenLabs Agent",
+        "type": "object",
+        "required": [
+          "type",
+          "agent_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "elevenlabs"
+            ]
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Agent ID from the ElevenLabs dashboard."
+          }
+        }
+      },
+      "OpenAIVoiceAgent": {
+        "title": "OpenAI Realtime",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "openai"
+            ]
+          },
+          "system_prompt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Realtime session instructions."
+          },
+          "voice": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "OpenAI Realtime voice name."
+          },
+          "turn_detection": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true,
+            "description": "OpenAI Realtime `turn_detection` configuration, passed through as-is."
+          }
+        }
+      },
+      "CreateAgentTokenRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ttl_seconds": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 3600,
+            "default": 300,
+            "description": "How long the token can be exchanged for a session. Does not limit the session's own duration."
+          },
+          "dynamic_variables": {
+            "$ref": "#/components/schemas/DynamicVariables",
+            "description": "Bound into the token. These win over values the client passes when exchanging the token, so your backend controls what the browser cannot change."
+          }
+        }
+      },
+      "CreateAgentTokenResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "token",
+          "expires_at",
+          "agent_id"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Opaque conversation token. Relay it to the browser; the client SDK exchanges it for a session."
+          },
+          "expires_at": {
+            "type": "integer",
+            "description": "Unix time (seconds) after which the token can no longer be exchanged.",
+            "example": 1792680000
+          },
+          "agent_id": {
+            "type": "string",
+            "example": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c"
+          }
+        }
+      },
+      "VoiceAgentDetails": {
+        "description": "Short-lived, browser-safe credentials for the agent's voice provider, discriminated by `type`. Never contains the vendor API key.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/KflVoiceAgentDetails"
+          },
+          {
+            "$ref": "#/components/schemas/ElevenLabsVoiceAgentDetails"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAIVoiceAgentDetails"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "kfl": "#/components/schemas/KflVoiceAgentDetails",
+            "elevenlabs": "#/components/schemas/ElevenLabsVoiceAgentDetails",
+            "openai": "#/components/schemas/OpenAIVoiceAgentDetails"
+          }
+        }
+      },
+      "KflVoiceAgentDetails": {
+        "title": "Keyframe Voice Agent",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "signed_url"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "kfl"
+            ]
+          },
+          "signed_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Signed WebSocket URL for the Keyframe voice agent runtime. Any overrides and rendered dynamic variables are bound into the signature, so the client cannot alter them."
+          }
+        }
+      },
+      "ElevenLabsVoiceAgentDetails": {
+        "title": "ElevenLabs Agent",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "agent_id",
+          "signed_url"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "elevenlabs"
+            ]
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "ElevenLabs agent ID."
+          },
+          "signed_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Signed ElevenLabs conversation WebSocket URL."
+          }
+        }
+      },
+      "OpenAIVoiceAgentDetails": {
+        "title": "OpenAI Realtime",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "token"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "openai"
+            ]
+          },
+          "token": {
+            "type": "string",
+            "description": "Ephemeral OpenAI Realtime client secret."
           }
         }
       },
