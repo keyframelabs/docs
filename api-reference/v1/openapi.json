@@ -1464,7 +1464,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentOverrideField"
             },
-            "description": "Fields a caller may change per session via `overrides`. Anything else is rejected with 403."
+            "description": "Fields a caller may change per session via `overrides`. Anything else is rejected with 403. Defaults to `system_prompt`, `greeting`, `voice_id`, `llm_model`; `knowledge_base` must be granted explicitly."
           },
           "dynamic_variable_defaults": {
             "$ref": "#/components/schemas/DynamicVariables",
@@ -1511,6 +1511,28 @@
           "updated_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Id of the org's webhook endpoint (configured in the dashboard) that receives this agent's post-session events. `null` = none."
+          },
+          "webhook_events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "post_session_transcript"
+              ]
+            },
+            "nullable": true,
+            "description": "Events delivered for this agent. `null` inherits the endpoint's enabled events; `[]` turns them all off."
+          },
+          "record_audio": {
+            "type": "boolean",
+            "default": false,
+            "description": "Record the session's audio and keep it for playback in the dashboard."
           }
         }
       },
@@ -1520,7 +1542,8 @@
           "system_prompt",
           "greeting",
           "voice_id",
-          "llm_model"
+          "llm_model",
+          "knowledge_base"
         ]
       },
       "AgentSessionOverrides": {
@@ -1543,6 +1566,14 @@
           "llm_model": {
             "type": "string",
             "description": "A model from GET /llm-models."
+          },
+          "knowledge_base": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeBaseAttachment"
+            },
+            "nullable": true,
+            "description": "Replaces the agent's `knowledge_base` for this session. Allowed only when `knowledge_base` is in the agent's `allowed_overrides`."
           }
         }
       },
@@ -1730,6 +1761,14 @@
               "set_emotion"
             ],
             "description": "Tools the LLM may call. `set_emotion` lets it change the avatar's expression mid-conversation."
+          },
+          "knowledge_base": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeBaseAttachment"
+            },
+            "default": [],
+            "description": "Org knowledge-base documents included in the agent's prompt."
           }
         }
       },
@@ -2553,6 +2592,32 @@
             "description": "Pass as `after` for the next page. Opaque."
           }
         }
+      },
+      "KnowledgeBaseAttachment": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Knowledge-base document id. Documents are managed in the dashboard."
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Display name; informational."
+          },
+          "usage_mode": {
+            "type": "string",
+            "enum": [
+              "prompt"
+            ],
+            "default": "prompt",
+            "description": "How the document is used. `prompt` inlines it into the system prompt."
+          }
+        },
+        "description": "One attached knowledge-base document."
       }
     }
   }
