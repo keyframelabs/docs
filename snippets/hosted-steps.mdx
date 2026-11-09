@@ -17,7 +17,7 @@ title: "Hosted Steps"
       style={{ width:"35%" }}
     />
 
-    Add to `Allowed Origins` the client URLs you'd like to authorize for your publishable key.
+    Add to `Allowed Origins` the client URLs you'd like to authorize for your agent.
 
     <img
       src="/images/image-2.png"
@@ -25,7 +25,7 @@ title: "Hosted Steps"
       style={{ width:"35%" }}
     />
 
-    Click `Create deployment`, and copy the generated publishable key.
+    Click `Create deployment`, and copy the generated agent ID (`agent_...`).
   </Step>
   <Step title="Create the HTML" stepNumber={2}>
     ```html expandable
@@ -71,11 +71,11 @@ title: "Hosted Steps"
       <script type="module">
         import { PersonaEmbed } from 'https://esm.sh/@keyframelabs/elements@latest';
     
-        const publishableKey = 'kfl_pk_live_...';
+        const agentId = 'agent_...';
     	
         const embed = new PersonaEmbed({
       	  container: document.getElementById('avatar-video'),
-      	  publishableKey: publishableKey,
+      	  agentId: agentId,
       	  videoFit: 'contain',
       	  onStateChange: (status) => console.log('Status:', status),
           onAgentStateChange: (state) => console.log('Agent:', state),
@@ -110,12 +110,16 @@ title: "Hosted Steps"
     ```
   </Step>
   <Step title="Replace placeholder provider credentials" stepNumber={3}>
-    In the HTML, replace `publishableKey `with the  one generated in the prerequisites.
+    In the HTML, replace `agentId` with the one generated in step 1.
 
     ```html
-    // Replace with key generated in step 1
-    const publishableKey = 'kfl_pk_live_...';
+    // Replace with the agent ID from step 1
+    const agentId = 'agent_...';
     ```
+
+    <Note>
+      Agents created before agent IDs can still pass `publishableKey: 'kfl_pk_live_...'` instead. For a `private` agent, mint a conversation token on your server with `POST /v1/agents/{agent_id}/token` and pass `conversationToken` instead of `agentId`.
+    </Note>
   </Step>
   <Step title="Start a local server" stepNumber={4}>
     <Tabs>
@@ -143,5 +147,5 @@ title: "Hosted Steps"
 
 Congratulations on your first video call with a Keyframe avatar. A couple things worth highlighting:
 
-- Your Keyframe publishable key authenticates your client application with both your agent or LLM and Keyframe
+- Your Keyframe agent ID authenticates your client application with both your agent or LLM and Keyframe
 - The Keyframe Elements SDK establishes all necessary real-time audio/video connections to display and interact with your avatar
