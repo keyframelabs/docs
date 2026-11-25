@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Sessions API",
-    "version": "1.3.0"
+    "version": "1.4.0"
   },
   "servers": [
     {
@@ -214,7 +214,7 @@
           }
         ],
         "summary": "List agents",
-        "description": "Agents in your organization, newest first. Drafts are omitted; fetch one by ID to read a draft.\n\nAgents are designed and published on the Keyframe platform. This API reads them and starts sessions from them; it does not create or edit them.",
+        "description": "Agents in your organization, newest first. Drafts are omitted; fetch one by ID to read a draft.",
         "responses": {
           "200": {
             "description": "Agents returned",
@@ -242,6 +242,168 @@
                       "detail": "Invalid API Key"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "createAgent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Create agent",
+        "description": "Create an agent in your API key's organization. The agent is `active` immediately and can start sessions with the returned `agent_id`.\n\nAgents created here also appear on the Keyframe platform, where they can be edited like any other.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentRequest"
+              },
+              "examples": {
+                "keyframeVoiceAgent": {
+                  "summary": "Keyframe Voice Agent",
+                  "value": {
+                    "label": "Support agent",
+                    "persona_id": "0b9d6f3a-2c1e-4f7a-8d5b-6e4c2a1f9b73",
+                    "voice_agent": {
+                      "type": "kfl",
+                      "provider": "elevenlabs",
+                      "voice_id": "<voice_id from GET /voices>",
+                      "llm_model": "<model_id from GET /llm-models>",
+                      "system_prompt": "You are a support agent for {{company}}.",
+                      "greeting": "Hi! How can I help?"
+                    },
+                    "allowed_origins": [
+                      "https://app.example.com"
+                    ],
+                    "dynamic_variable_defaults": {
+                      "company": "Acme"
+                    }
+                  }
+                },
+                "elevenLabsAgent": {
+                  "summary": "ElevenLabs Agent, private",
+                  "value": {
+                    "label": "Sales agent",
+                    "persona_id": "0b9d6f3a-2c1e-4f7a-8d5b-6e4c2a1f9b73",
+                    "voice_agent": {
+                      "type": "elevenlabs",
+                      "agent_id": "<ElevenLabs agent id>"
+                    },
+                    "voice_agent_key": "<ElevenLabs API key>",
+                    "auth": "private"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSummary"
+                },
+                "examples": {
+                  "created": {
+                    "value": {
+                      "id": "3f2b8c1e-5a47-4d0b-9c1e-7a2d4e6f8b90",
+                      "agent_id": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c",
+                      "auth": "public",
+                      "publishable_key": null,
+                      "label": "Support agent",
+                      "status": "active"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid agent configuration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "missingOrigin": {
+                    "value": {
+                      "detail": "Public agents require at least one allowed origin"
+                    }
+                  },
+                  "emptyLabel": {
+                    "value": {
+                      "detail": "label must be non-empty"
+                    }
+                  },
+                  "unknownWebhook": {
+                    "value": {
+                      "detail": "webhook_id does not reference a webhook in this org"
+                    }
+                  },
+                  "missingKey": {
+                    "value": {
+                      "detail": "voice_agent_key is required for elevenlabs voice agents"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "invalidApiKey": {
+                    "value": {
+                      "detail": "Invalid API Key"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Avatar not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The agent could not be created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The request body failed validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
                 }
               }
             }
@@ -307,6 +469,340 @@
                       "detail": "Agent not found"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "updateAgent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Update agent",
+        "description": "Update an `active` or `disabled` agent in place. The change is permanent and applies to every session started afterwards; sessions already running are not affected. To change values for a single session instead, pass `overrides` to POST /sessions.\n\nOnly the fields you send change, and `voice_agent` is merged rather than replaced (see the field's description).\n\nAn edit made on the Keyframe platform is saved as a draft of the agent and replaces the agent's whole configuration when published, including changes made here after the draft was opened.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AgentIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAgentRequest"
+              },
+              "examples": {
+                "updatePrompt": {
+                  "summary": "Change the prompt only",
+                  "value": {
+                    "voice_agent": {
+                      "system_prompt": "You are a concise support agent."
+                    }
+                  }
+                },
+                "clearField": {
+                  "summary": "Clear a field and rename",
+                  "value": {
+                    "label": "Support agent v2",
+                    "voice_agent": {
+                      "tts_model": null
+                    }
+                  }
+                },
+                "makePrivate": {
+                  "summary": "Require conversation tokens",
+                  "value": {
+                    "auth": "private"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated agent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agent"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "missingOrigin": {
+                    "value": {
+                      "detail": "Public agents require at least one allowed origin"
+                    }
+                  },
+                  "typeChangeNeedsKey": {
+                    "value": {
+                      "detail": "voice_agent_key is required for openai voice agents"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "invalidApiKey": {
+                    "value": {
+                      "detail": "Invalid API Key"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agent not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotFound": {
+                    "value": {
+                      "detail": "Agent not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The update conflicted with a concurrent change",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The request body, or the merged `voice_agent`, failed validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_id}/deactivate": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "deactivateAgent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Deactivate agent",
+        "description": "Set an `active` agent to `disabled`. It can no longer start sessions or mint conversation tokens until it is activated again; its configuration is kept and can still be updated. Sessions already running are not ended. Calling this on a disabled agent is a no-op.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AgentIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent deactivated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSummary"
+                },
+                "examples": {
+                  "deactivated": {
+                    "value": {
+                      "id": "3f2b8c1e-5a47-4d0b-9c1e-7a2d4e6f8b90",
+                      "agent_id": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c",
+                      "auth": "public",
+                      "publishable_key": null,
+                      "label": "Support agent",
+                      "status": "disabled"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "invalidApiKey": {
+                    "value": {
+                      "detail": "Invalid API Key"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agent not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotFound": {
+                    "value": {
+                      "detail": "Agent not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The agent changed state concurrently",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_id}/activate": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "activateAgent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Activate agent",
+        "description": "Set a `disabled` agent back to `active`. A `public` agent needs at least one allowed origin. Calling this on an active agent is a no-op.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AgentIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent activated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSummary"
+                },
+                "examples": {
+                  "activated": {
+                    "value": {
+                      "id": "3f2b8c1e-5a47-4d0b-9c1e-7a2d4e6f8b90",
+                      "agent_id": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c",
+                      "auth": "public",
+                      "publishable_key": null,
+                      "label": "Support agent",
+                      "status": "active"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The agent cannot be activated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "missingOrigin": {
+                    "value": {
+                      "detail": "At least one allowed origin is required before publishing"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "invalidApiKey": {
+                    "value": {
+                      "detail": "Invalid API Key"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agent not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
+                },
+                "examples": {
+                  "agentNotFound": {
+                    "value": {
+                      "detail": "Agent not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The agent changed state concurrently",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPExceptionResponse"
                 }
               }
             }
@@ -1406,7 +1902,7 @@
       },
       "Agent": {
         "type": "object",
-        "description": "An avatar paired with a voice agent configuration, designed and published on the Keyframe platform. Sessions started from an agent inherit its configuration.",
+        "description": "An avatar paired with a voice agent configuration. Create and update agents with this API or on the Keyframe platform. Sessions started from an agent inherit its configuration.",
         "required": [
           "id",
           "agent_id",
@@ -1439,7 +1935,7 @@
           },
           "label": {
             "type": "string",
-            "description": "Display name set on the platform.",
+            "description": "Display name.",
             "example": "Support agent"
           },
           "status": {
@@ -1464,7 +1960,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentOverrideField"
             },
-            "description": "Fields a caller may change per session via `overrides`. Anything else is rejected with 403. Defaults to `system_prompt`, `greeting`, `voice_id`, `llm_model`; `knowledge_base` must be granted explicitly."
+            "description": "Fields a caller may change per session via `overrides`. Anything else is rejected with 403. Defaults to `system_prompt`, `greeting`, `voice_id`, `llm_model`; `knowledge_base` and `persona_id` must be granted explicitly."
           },
           "dynamic_variable_defaults": {
             "$ref": "#/components/schemas/DynamicVariables",
@@ -1536,6 +2032,223 @@
           }
         }
       },
+      "CreateAgentRequest": {
+        "type": "object",
+        "required": [
+          "label",
+          "persona_id",
+          "voice_agent"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Display name.",
+            "example": "Support agent"
+          },
+          "persona_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Avatar the agent renders. Must be a public avatar or one owned by your organization."
+          },
+          "voice_agent": {
+            "$ref": "#/components/schemas/VoiceAgent"
+          },
+          "voice_agent_key": {
+            "type": "string",
+            "minLength": 1,
+            "writeOnly": true,
+            "description": "Credential for the voice agent provider: your ElevenLabs API key for `elevenlabs`, your OpenAI API key for `openai`. Required for those types; encrypted at rest and never returned. Omit it for `kfl` agents, which need no provider credential."
+          },
+          "allowed_origins": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Browser origins that may start sessions with the bare `agent_id`. Not applied to sessions started with a conversation token or an API key. Required (at least one) when `auth` is `public`.",
+            "example": [
+              "https://app.example.com"
+            ],
+            "default": []
+          },
+          "auth": {
+            "type": "string",
+            "enum": [
+              "public",
+              "private"
+            ],
+            "description": "`public`: a page on an allowed origin can start a session with the bare `agent_id`. `private`: client sessions require a conversation token minted server-side with POST /agents/{agent_id}/token.",
+            "default": "public"
+          },
+          "allowed_overrides": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOverrideField"
+            },
+            "description": "Fields a caller may change per session via `overrides`. Anything else is rejected with 403. Defaults to `system_prompt`, `greeting`, `voice_id`, `llm_model`; `knowledge_base` and `persona_id` must be granted explicitly."
+          },
+          "dynamic_variable_defaults": {
+            "$ref": "#/components/schemas/DynamicVariables",
+            "description": "Fallback values for `{{placeholders}}` in the system prompt and greeting. Values supplied at session or token creation take precedence."
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Id of the org's webhook endpoint (configured in the dashboard) that receives this agent's post-session events. `null` = none."
+          },
+          "webhook_events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "post_session_transcript"
+              ]
+            },
+            "nullable": true,
+            "description": "Events delivered for this agent. `null` inherits the endpoint's enabled events; `[]` turns them all off."
+          },
+          "record_audio": {
+            "type": "boolean",
+            "default": false,
+            "description": "Record the session's audio and keep it for playback in the dashboard."
+          }
+        }
+      },
+      "UpdateAgentRequest": {
+        "type": "object",
+        "description": "Every field is optional; omitted fields keep their current value.",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Display name.",
+            "example": "Support agent"
+          },
+          "persona_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Avatar the agent renders. Must be a public avatar or one owned by your organization."
+          },
+          "voice_agent": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Partial voice agent configuration, merged into the stored one: only the fields you send change. Nested objects such as `voice_settings` merge key by key; arrays such as `knowledge_base` and `stt_language_hints` are replaced whole. Send `null` to clear a nullable field. The merged result must be a valid voice agent.\n\nSending a different `type` replaces the whole configuration instead of merging, and requires `voice_agent_key` unless the new type is `kfl`.",
+            "example": {
+              "system_prompt": "You are a concise support agent.",
+              "voice_settings": {
+                "stability": 0.6
+              }
+            }
+          },
+          "voice_agent_key": {
+            "type": "string",
+            "minLength": 1,
+            "writeOnly": true,
+            "description": "Rotate the voice agent provider credential. Required when `voice_agent.type` changes to `elevenlabs` or `openai`."
+          },
+          "allowed_origins": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Browser origins that may start sessions with the bare `agent_id`. Not applied to sessions started with a conversation token or an API key. An active `public` agent must keep at least one.",
+            "example": [
+              "https://app.example.com"
+            ]
+          },
+          "auth": {
+            "type": "string",
+            "enum": [
+              "public",
+              "private"
+            ],
+            "description": "`public`: a page on an allowed origin can start a session with the bare `agent_id`. `private`: client sessions require a conversation token minted server-side with POST /agents/{agent_id}/token."
+          },
+          "allowed_overrides": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOverrideField"
+            },
+            "description": "Fields a caller may change per session via `overrides`. Replaces the current list."
+          },
+          "dynamic_variable_defaults": {
+            "$ref": "#/components/schemas/DynamicVariables",
+            "description": "Fallback values for `{{placeholders}}`. Replaces the current set."
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Id of the org's webhook endpoint (configured in the dashboard) that receives this agent's post-session events. `null` = none. Send `null` to detach."
+          },
+          "webhook_events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "post_session_transcript"
+              ]
+            },
+            "nullable": true,
+            "description": "Events delivered for this agent. `null` inherits the endpoint's enabled events; `[]` turns them all off."
+          },
+          "record_audio": {
+            "type": "boolean",
+            "description": "Record the session's audio and keep it for playback in the dashboard."
+          }
+        }
+      },
+      "AgentSummary": {
+        "type": "object",
+        "description": "Identity and state of an agent. Fetch the full configuration with GET /agents/{agent_id}.",
+        "required": [
+          "id",
+          "agent_id",
+          "auth",
+          "label",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Internal identifier. Use `agent_id` in API calls and client code."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Public handle: `agent_` followed by 32 hex characters. Immutable, and safe to ship in client code for `public` agents.",
+            "example": "agent_8f3c2a1b9d4e4f6a8b7c6d5e4f3a2b1c"
+          },
+          "auth": {
+            "type": "string",
+            "enum": [
+              "public",
+              "private"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "example": "Support agent"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "disabled",
+              "draft"
+            ]
+          },
+          "publishable_key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "deprecated": true,
+            "description": "Legacy `kfl_pk_live_...` handle, present only on agents created before agent IDs. Use `agent_id` instead."
+          }
+        }
+      },
       "AgentOverrideField": {
         "type": "string",
         "enum": [
@@ -1543,13 +2256,14 @@
           "greeting",
           "voice_id",
           "llm_model",
-          "knowledge_base"
+          "knowledge_base",
+          "persona_id"
         ]
       },
       "AgentSessionOverrides": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Per-session changes to a Keyframe Voice Agent's configuration. Every field you send must appear in the agent's `allowed_overrides`, or the request fails with 403 before any capacity is reserved. Only agents whose `voice_agent.type` is `kfl` accept overrides.",
+        "description": "Per-session changes to an agent's configuration. Every field you send must appear in the agent's `allowed_overrides`, or the request fails with 403 before any capacity is reserved. Only agents whose `voice_agent.type` is `kfl` accept overrides, except `persona_id`, which works with every voice agent type.",
         "properties": {
           "system_prompt": {
             "type": "string",
@@ -1574,6 +2288,11 @@
             },
             "nullable": true,
             "description": "Replaces the agent's `knowledge_base` for this session. Allowed only when `knowledge_base` is in the agent's `allowed_overrides`."
+          },
+          "persona_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Avatar to render for this session instead of the agent's. Must be a public avatar or one owned by your organization. Allowed only when `persona_id` is in the agent's `allowed_overrides`."
           }
         }
       },
